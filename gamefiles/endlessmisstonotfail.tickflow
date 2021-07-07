@@ -4328,12 +4328,15 @@ unrest 0x60
 random 3
 switch
 	case 0
+
 		async_sub 0x5A
+		rest 0x60
 		rest 0x180
 		async_sub 0x5C
 	break
 	case 1
 		async_sub 0x58
+		rest 0x60
 		rest 0xC0
 		async_sub 0x58
 		rest 0xC0
@@ -4341,6 +4344,7 @@ switch
 	break
 	case 2
 		async_sub 0x5A
+		rest 0x60
 		rest 0xC0
 		rest 0x30
 		async_sub 0x58
