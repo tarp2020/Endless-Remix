@@ -13424,8 +13424,13 @@ game_cellanim 0x31, 5
 stop 
 
 loadbrf:
-random 2
+random 3
 switch
+	case 2
+		remove_cellanim 5
+		set_cellanim 5, u"rom:/cellanim/ntrShortLive_remix9.zlib", -1
+		call cellanim5wait
+	break
 	case 1
 		remove_cellanim 5
 		set_cellanim 5, u"rom:/cellanim/ntrShortLive_remix5.zlib", -1
