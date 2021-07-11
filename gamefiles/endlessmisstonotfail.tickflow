@@ -1144,7 +1144,7 @@ choosegameslot1alt:
 0x65<2>
 call clearslot1
 rest 2
-random 7
+random 8
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
@@ -1274,6 +1274,23 @@ switch
 		async_call fish
 		rest 0x10	// 0.5 beats
 	break
+	default
+	rest 0x5E	// 2.0 beats
+		0x65<1> 1, "agb_tap_A_title"
+		async_call disabletext
+		async_call loadtaptroupe
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 0x0C
+		sub 4
+		0x29<2> 
+		async_call taptroupe
+		rest 0x10	// 0.5 beats
+	break
 endswitch
 return 
 
@@ -1342,7 +1359,7 @@ switch
 	case 2
 		random 3
 		switch
-			case 0
+			default
 				rest 0x5E	// 2.0 beats
 				0x65<1> 1, "rvl_rap_L_title"
 				async_call disabletext
@@ -1374,23 +1391,6 @@ switch
 				sub 4
 				0x29<2> 
 				async_call rap6
-				rest 0x10	// 0.5 beats
-			break
-			case 2
-				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_rap_L_title"
-				async_call disabletext
-				async_call loadrap
-				rest 0x60	// 2.0 beats
-				rest 0xC0	// 4.0 beats
-				
-				rest 0xC0	// 4.0 beats
-				rest 0xB0	// 3.5 beats
-				call changeEngineSynchronous
-				engine 0x2B
-				sub 4
-				0x29<2> 
-				async_call rap
 				rest 0x10	// 0.5 beats
 			break
 		endswitch
@@ -1465,7 +1465,7 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_rockers_L_title"
+		0x65<1> 1, "ntr_chorus_L_title"
 		async_call disabletext
 		async_call loadrocker
 		rest 0x60	// 2.0 beats
@@ -1490,7 +1490,7 @@ rest 2
 random 7
 	case 5
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ctr_sumou_L_title"
+		0x65<1> 1, "ntr_pingpong_A_title"
 		async_call disabletext
 		async_call loadtambourine
 		rest 0x60	// 2.0 beats
@@ -1699,9 +1699,6 @@ rest 2
 random 8
 switch
 	case 5
-		random 4
-		switch
-			default
 		        rest 0x5E    // 2.0 beats
 		        0x65<1> 1, "ctr_tango_L_title"
 		        async_call disabletext
@@ -1717,45 +1714,7 @@ switch
 		        sub 4
 		        0x29<2> 
 		        async_call tango
-		        rest 0x18    // 0.5 beats
-		    break
-		    case 2
-		    	rest 0x5E    // 2.0 beats
-		        0x65<1> 1, "ctr_tango_L_title"
-		        async_call disabletext
-		        async_call loadtangoremix7
-		        rest 0x60    // 2.0 beats
-		        rest 0xC0    // 4.0 beats
-		        
-		        rest 0xC0    // 4.0 beats
-		        rest 0x90    // 3.0 beats
-		        rest 0x18    // 0.5 beats
-		        call changeEngineSynchronous
-		        engine 0x3D
-		        sub 4
-		        0x29<2> 
-		        async_call tango
-		        rest 0x18    // 0.5 beats
-		    break
-		    case 3
-		    	rest 0x5E    // 2.0 beats
-		        0x65<1> 1, "ctr_tango_L_title"
-		        async_call disabletext
-		        async_call loadtangoremix
-		        rest 0x60    // 2.0 beats
-		        rest 0xC0    // 4.0 beats
-		        
-		        rest 0xC0    // 4.0 beats
-		        rest 0x90    // 3.0 beats
-		        rest 0x18    // 0.5 beats
-		        call changeEngineSynchronous
-		        engine 0x3D
-		        sub 4
-		        0x29<2> 
-		        async_call tango
-		        rest 0x18    // 0.5 beats
-		    break
-		endswitch
+		        rest 0x18    // 0.5 beats   
     break
     case 6
         rest 0x5E    // 2.0 beats
@@ -2180,11 +2139,13 @@ switch
 		rest 0xC0	// 4.0 beats
 		rest 0x30	// 1.0 beats
 		rest 0x18	// 0.5 beats
+		
 		play_sfx 0x10002E1
 		rest 0x18	// 0.5 beats
 		rest 0x18	// 0.5 beats
 		play_sfx 0x10002E2
 		rest 0x18	// 0.5 beats
+		play_sfx 0x10005FE
 		rest 0x20	// 0.667 beats
 		call changeEngineSynchronous
 		engine 0x2C
@@ -4266,6 +4227,7 @@ race:
 0x8F 3
 rest 0x8	// 0.333 beats
 0x102 1
+0x105 1
 0x101 1
 0x106 0x30, 0
 rest 0x8
@@ -4292,10 +4254,12 @@ switch
 		rest 0x30
 		async_sub 0x57
 		rest 0x60
-		async_sub 0x56
+		async_sub 0x58
+		0x104 0
+		0x104 1
 		rest 0xC0
 		rest 0x30
-		async_sub 0x57
+		async_sub 0x59
 	break
 	case 2
 		async_sub 0x56
@@ -4311,7 +4275,6 @@ stop
 
 freeze:
 0x8F 3
-rest 0x8	// 0.333 beats
 random 2
 switch
 	case 1
@@ -4321,14 +4284,13 @@ switch
 		0x106 1
 	break
 endswitch
-rest 0x8
+rest 0x10
 fade<1> 1, 1, 1
 input 1
 unrest 0x60
 random 3
 switch
 	case 0
-
 		async_sub 0x5A
 		rest 0x60
 		rest 0x180
@@ -6709,9 +6671,10 @@ switch
 		rest 0x18
 		0x100 0, 0x18
 		rest 0xC
-		0x101<2> 1
 		rest 0xC
 		0x100 2, 0x18
+		rest 0xC
+		rest 0xC
 	break
 	case 2
 		async_call tambourinesfx2
@@ -6729,7 +6692,9 @@ switch
 		rest 0x18
 		0x104 1
 		rest 0x18		
-		rest 0x18
+		rest 0xC
+		0x101<2> 0
+		rest 0xC
 		0x100 2, 0x48
 		play_sfx 0x10011A7
 		rest 0xC	// 0.25 beats
@@ -6737,18 +6702,23 @@ switch
 		rest 0xC	// 0.25 beats
 		rest 0x30
 		0x100 2, 0x48
-		rest 0x48
+		rest 0x24
+		rest 0x24
 		0x100 2, 0x48
-		rest 0x60
-		0x100 2, 0x18
-		rest 0x18
-		0x100 2, 0x18
-		rest 0x18
+		rest 0x30
+		rest 0x30
 		0x100 2, 0x18
 		rest 0xC
-		0x101<2> 1
 		rest 0xC
 		0x100 2, 0x18
+		rest 0xC
+		rest 0xC
+		0x100 2, 0x18
+		rest 0xC
+		rest 0xC
+		0x100 2, 0x18
+		rest 0xC
+		rest 0xC
 	break
 	case 0
 		async_call tambourinesfx3
@@ -6781,17 +6751,19 @@ switch
 		rest 0x30	// 1.0 beats
 		0x100 0, 0x30
 		0x103 1
-		rest 0x30	// 1.0 beats
-		0x100 2, 0x30
-		0x103 1
-		rest 0x30	// 1.0 beats
-		0x100 2, 0x30
-		0x103 1
-		rest 0x30	// 0.75 beats
+		rest 0x18	// 0.5 beats
+		rest 0x18	// 1.0 beats
 		0x100 2, 0x30
 		0x103 1
 		rest 0x18	// 0.5 beats
-		0x101<2> 1
+		rest 0x18	// 1.0 beats
+		0x100 2, 0x30
+		0x103 1
+		rest 0x18	// 0.5 beats
+		rest 0x18	// 1.0 beats
+		0x100 2, 0x30
+		0x103 1
+		rest 0x18	// 0.5 beats
 		rest 0x30	// 1.0 beats
 	break
 	default
@@ -6816,14 +6788,13 @@ switch
 		0x100 0, 0x18
 		0x101 0
 		rest 0x18	// 0.5 beats
-		0x101<2> 1
 		rest 0xC	// 0.25 beats
 		0x100 2, 0xC
 		rest 0xC	// 0.25 beats
 		rest 0x30
-		0x103 1
 		rest 0x18	// 0.5 beats
 		async_call tambourinesfxremix9
+		0x103 1
 		0x102 1
 		rest 0x30	// 1.0 beats
 		0x102 1
@@ -6844,7 +6815,6 @@ switch
 		0x100 0, 0x18
 		0x101 0
 		rest 0x18	// 0.5 beats
-		0x101<2> 1
 		rest 0xC	// 0.25 beats
 		0x100 2, 0xC
 		rest 0xC	// 0.25 beats
@@ -6909,6 +6879,830 @@ switch
 	break
 endswitch
 stop 
+
+countin:
+play_sfx 0x10002DF
+0x106<1> 0
+0x101
+rest 0x30	// 1.0 beats
+0x106<1> 0
+0x101
+play_sfx 0x10002E0
+rest 0x30	// 1.0 beats
+0x106<1> 0
+0x101
+play_sfx 0x10002E1
+rest 0x30	// 1.0 beats
+0x106<1> 0
+0x101
+play_sfx 0x10002E2
+rest 0x30	// 1.0 beats
+stop 
+
+ready:
+0x40<1> 0x1000B1C, 0x158
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B13, 0x158
+stop
+
+andbom:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B1F, 0x140
+stop 
+
+andtap:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B21, 0x160
+stop 
+
+tapvoice:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B1B, 0x124
+stop 
+
+tapvoicewithslap:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B1B, 0x124
+0x40<1> 0x1000B15, 0x120
+stop 
+
+performancecheckfourbeat:
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+stop 
+
+performancecheckfourbeatleg:
+0xA2
+0x9F<5> 2
+rest 0x2F	// 0.5 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 1	// 0.5 beats
+
+rest 3	// <0.125 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 0x2D	// >0.875 beats
+
+0xA2
+0x9F<5> 2
+rest 0x2F	// 0.5 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 1	// 0.5 beats
+
+rest 3	// <0.125 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 0x2D	// >0.875 beats
+stop 
+
+performancecheckfourbeatlegreturn:
+0xA2
+0x9F<5> 2
+rest 0x2F	// 0.5 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 1	// 0.5 beats
+
+rest 3	// <0.125 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 0x2D	// >0.875 beats
+
+0xA2
+0x9F<5> 2
+rest 0x2F	// 0.5 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 1	// 0.5 beats
+
+rest 3	// <0.125 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 0x2D	// >0.875 beats
+stop 
+
+fourbeatstep:
+async_call performancecheckfourbeat
+async_call performancecheckfourbeatleg
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x100
+0x102 5
+rest 0x2F	// 0.5 beats
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x102 5
+stop 
+
+fourbeatstepprep:
+async_call performancecheckfourbeat
+async_call performancecheckfourbeatleg
+async_call tapvoice
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x100
+0x102 5
+rest 0x2F	// 0.5 beats
+//0x103 1
+rest 1	// 0.5 beats
+async_call ready
+0x102 4
+0x100
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x25	// >0.875 beats
+rest 8	// <0.167 beats
+0x103 0xE
+0x102 0xE
+stop 
+
+fourbeatstepinitial:
+async_call performancecheckfourbeat
+async_call performancecheckfourbeatlegreturn
+async_call tapvoice
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x100
+0x102 5
+rest 0x2F	// 0.5 beats
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x102 5
+stop 
+
+fourbeatstepreturn:
+async_call performancecheckfourbeat
+async_call performancecheckfourbeatlegreturn
+async_call tapvoicewithslap
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x100
+0x102 5
+rest 0x2F	// 0.5 beats
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x102 5
+stop 
+
+fourbeatstepreturnskillstar:
+async_call performancecheckfourbeat
+async_call performancecheckfourbeatlegreturn
+async_call tapvoicewithslap
+0x100
+rest 0x2F	// 0.5 beats
+0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+async_sub 0x43, 0xC
+async_sub 0x4B, 0xC
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x100
+0x102 5
+rest 0x2F	// 0.5 beats
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x102 5
+stop 
+
+performancechecktwobeat:
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+stop 
+
+performancechecktwobeatleg:
+0xA2
+0x9F<5> 2
+rest 0x2F	// 0.5 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 1	// 0.5 beats
+
+rest 3	// <0.125 beats
+0xA2<2> 
+if 0
+ 0x103 1
+endif
+rest 0x2D	// >0.875 beats
+stop 
+
+twobeatstep:
+async_call performancechecktwobeat
+async_call performancechecktwobeatleg
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+//0x103 1
+rest 1	// 0.5 beats
+0x102 4
+0x100 1
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x2D	// >0.875 beats
+0x102 5
+stop
+
+twobeatstepprep:
+async_call performancechecktwobeat
+async_call performancechecktwobeatleg
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+//0x103 1
+rest 1	// 0.5 beats
+async_call ready
+0x102 4
+0x100
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x25	// <0.875 beats
+rest 8	// <0.167 beats
+0x103 0xE
+0x102 0xE
+stop 
+
+twobeatstepprepreturn:
+async_call performancechecktwobeat
+async_call performancechecktwobeatleg
+async_call tapvoicewithslap
+0x100
+rest 0x2F	// 0.5 beats
+0x8E 0
+0x103 1
+rest 1	// 0.5 beats
+async_call ready
+0x102 4
+0x100
+rest 3	// <0.125 beats
+//0x103 1
+rest 0x25	// <0.875 beats
+rest 8	// <0.167 beats
+0x103 0xE
+0x102 0xE
+stop 
+
+threebomvisual:
+rest 0x30	// 1.0 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x18	// 0.5 beats
+stop
+
+threebomvoice:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B19, 0x130
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1A, 0x130
+rest 0x18	// 0.5 beats
+stop
+
+threebomfinalvisual:
+rest 0x30	// 1.0 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x18	// 0.5 beats
+0x102 5
+stop
+
+threebomfinalvoice:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B19, 0x130
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1A, 0x130
+rest 0x18	// 0.5 beats
+0x40<1> 0x1000B1B, 0x124
+0x40<1> 0x1000B15, 0x120
+stop
+
+bomswap:
+rest 0x28	// <0.75 beats
+0x103 8
+rest 8	// 1 tick
+stop 
+
+bomswapfinal:
+rest 8	// 8 ticks
+rest 0x27	// <1.0 beats
+0x103 1
+rest 1	// 1 tick
+0x103 5
+stop 
+
+performancecheckthreebom:
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+stop 
+
+threebom:
+async_call andbom
+rest 0x18	// 0.5 beats
+0x8E 1
+async_call threebomvisual
+async_call threebomvoice
+async_call bomswap
+async_call performancecheckthreebom
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x18	// 0.5 beats
+stop
+
+threebomfinal:
+async_call andbom
+rest 0x18	// 0.5 beats
+0x8E 1
+async_call threebomfinalvisual
+async_call threebomfinalvoice
+async_call bomswap
+async_call performancecheckthreebom
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x18	// 0.5 beats
+async_call bomswapfinal
+0x100
+stop
+
+zerobomvisual:
+rest 0x30	// 1.0 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+stop
+
+zerobomvoice:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B19, 0x130
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1A, 0x130
+rest 0x24	// 0.75 beats
+stop
+
+performancecheckzerobom:
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+stop 
+
+zerobom:
+async_call andtap
+rest 0x18	// 0.5 beats
+0x8E 1
+async_call zerobomvisual
+async_call zerobomvoice
+async_call bomswap
+async_call performancecheckzerobom
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+stop
+
+eightbomvisual:
+rest 0x30	// 1.0 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+stop
+
+eightbomvoice:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B19, 0x130
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1A, 0x130
+rest 0x24	// 0.75 beats
+stop
+
+performancecheckeightbom:
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+stop 
+
+eightbom:
+async_call andbom
+rest 0x18	// 0.5 beats
+0x8E 1
+async_call eightbomvisual
+async_call eightbomvoice
+async_call bomswap
+async_call performancecheckeightbom
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+stop
+
+fivebomvisual:
+rest 0x30	// 1.0 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x24	// 0.75 beats
+0x102 7
+rest 0x24	// 0.75 beats
+0x102 6
+rest 0x30	// 1.0 beats
+stop
+
+fivebomvoice:
+rest 0x30	// 1.0 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1E, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B20, 0x2A0
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B19, 0x130
+rest 0x24	// 0.75 beats
+0x40<1> 0x1000B1A, 0x130
+rest 0x30	// 1.0 beats
+stop
+
+performancecheckfivebom:
+rest 0x18	// 0.5 beats
+0x104
+rest 0x18	// 0.5 beats
+0x106<1> 0
+
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x12	// 0.375 beats
+0x104
+rest 0x12	// 0.375 beats
+0x106<1> 0
+rest 0x30	// 1.0 beats
+stop 
+
+fivebom:
+async_call andbom
+rest 0x18	// 0.5 beats
+0x8E 1
+async_call fivebomvisual
+async_call fivebomvoice
+async_call bomswap
+async_call performancecheckfivebom
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x18	// 0.5 beats
+0x8F 7		// Star activation (placed a couple beats early because the Tap Trial scene requires 3 inputs to get the star)
+rest 0xC	// 0.25 beats
+0x100
+rest 0x30	// 1.0 beats
+stop
+
+// In case you need this pattern without the skill star...
+fivebomnostar:
+async_call andbom
+rest 0x18	// 0.5 beats
+0x8E 1
+async_call fivebomvisual
+async_call fivebomvoice
+async_call bomswap
+async_call performancecheckfivebom
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x24	// 0.75 beats
+0x100
+rest 0x30	// 1.0 beats
+stop
+
+taptroupe:
+0x8F 3
+0x105 1
+rest 0x10	// 0.333 beats
+zoom 3, 0x168, 0x168
+pan 3, 8, 0
+fade<1> 1, 1, 1
+input 1
+random 3
+switch
+	case 0
+		async_call countin
+		rest 0x90
+		async_call fourbeatstepprep
+		rest 0xC0
+		async_call threebom
+		rest 0xC0
+		async_call fourbeatstepreturn
+	break
+	case 1
+		async_call countin
+		rest 0x90
+		async_call fourbeatstep
+		rest 0xC0
+		async_call fourbeatstep
+		rest 0xC0
+		async_call fourbeatstep
+	break
+	case 2
+		async_call countin
+		rest 0x90
+		async_call twobeatstepprep
+		rest 0x60
+		async_call eightbom
+		rest 0x180
+		async_call twobeatstepprepreturn
+	break
+endswitch
+stop
 
 Pattern1left:
 bytes 0, 1, 1, 0, 0
@@ -8262,6 +9056,8 @@ stop
 
 bossa:
 0x8F 3
+
+play_sfx 0x10005FF
 rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1
@@ -9864,6 +10660,7 @@ label 547
 0x102
 0x102<1>
 0x102<2>
+0x102<3>
 rest 0x60
 goto 547
 stop
@@ -9946,43 +10743,28 @@ random 3
 switch
 	case 0
 		sub 0x70
-		0x102<3>
 		rest 0x60
 		sub 0x70
-		0x102<3>
 		rest 0x60
 		sub 0x78
-		0x102<3>
 		rest 0x60
 		sub 0x70
-		0x102<3>
 	break
 	case 1
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 		sub 0x78
-		0x102<3>
 		rest 0x60
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 	break
 	case 2
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 		sub 0x78
-		0x102<3>
 		sub 0x78
-		0x102<3>
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 	break
 endswitch
 stop
@@ -9990,17 +10772,6 @@ stop
 rap:
 0x107<1> 1
 rest 0x8	// 0.333 beats
-random 2
-switch
-	case 0
-		0x106
-		0x107 1
-		0x108 0xA
-	break
-	case 1
-		0x107 0
-	break
-endswitch
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -10009,43 +10780,28 @@ random 3
 switch
 	case 0
 		sub 0x70
-		0x102<3>
 		rest 0x60
 		sub 0x70
-		0x102<3>
 		rest 0x60
 		sub 0x78
-		0x102<3>
 		rest 0x60
 		sub 0x70
-		0x102<3>
 	break
 	case 1
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 		sub 0x78
-		0x102<3>
 		rest 0x60
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 	break
 	case 2
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 		sub 0x78
-		0x102<3>
 		sub 0x78
-		0x102<3>
 		sub 0x70
-		0x102<3>
 		sub 0x70
-		0x102<3>
 	break
 endswitch
 stop
@@ -12092,8 +12848,13 @@ game_cellanim 0x22, 2
 stop
 
 loadtap:
-random 8
+random 9
 switch
+	case 8
+	remove_cellanim 2
+	set_cellanim 2, u"rom:/cellanim/agbTap_ranch.zlib", -1
+	call cellanim2wait
+	break
 	case 7
 	remove_cellanim 2
 	set_cellanim 2, u"rom:/cellanim/agbTap_piggy.zlib", -1
@@ -12154,6 +12915,46 @@ game_effect 0x0C, 2
 game_layout 0x0C, 4
 0x2B 0x0C, 3
 stop 
+
+loadtaptroupe:
+random 2
+switch
+	case 1
+	remove_cellanim 2
+	set_cellanim 2, u"rom:/cellanim/rvlTap_remix07.zlib", -1
+	call cellanim2wait
+	break
+	case 0
+	remove_cellanim 2
+	set_cellanim 2, u"rom:/cellanim/rvlTap_long.zlib", -1
+	call cellanim2wait
+	break
+endswitch
+remove_layout 4
+set_layout 4, u"rom:/layout/rvlTap.zlib", -1
+call layout4wait
+
+remove_effect 2
+set_effect 2, u"rom:/effect/rvlKarate.zlib", -1
+call effect2wait
+
+remove_sfx 1
+rest 0xC	// 0.25 beats
+sub 3
+set_sfx 1, u"GROUP_RVL_TAP"
+rest 0xC	// 0.25 beats
+
+remove_sfx 6
+rest 0xC	// 0.25 beats
+sub 3
+set_sfx 6, u"GROUP_RVL_TAP_VOICE"
+rest 0xC	// 0.25 beats
+
+game_cellanim 0x0C, 2
+game_effect 0x0C, 2
+game_layout 0x0C, 4
+0x2B 0x0C, 3
+stop
 
 loadexhibition:
 random 3
@@ -13588,7 +14389,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
-set_effect 4, u"rom:/effect/ntrCameraMan.zlib", -1
+set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
 remove_sfx 3
@@ -13979,7 +14780,7 @@ random 2
 switch 
 	case 1
 	remove_cellanim 4
-	set_cellanim 4, u"rom:/cellanim/ctrTeppan_long.zlib", -1
+	set_cellanim 4, u"rom:/cellanim/ctrTeppan_remix2.zlib", -1
 	call cellanim4wait
 	break
 	case 0
@@ -14458,8 +15259,6 @@ rest 0xC	// 0.25 beats
 game_cellanim 0x42, 4
 0x2B 0x42, 0x10
 stop
-
-
 
 loaddrum:
 remove_cellanim 4
