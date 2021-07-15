@@ -159,6 +159,7 @@ rest 0x5F	// 2.0 beats
 rest 0x60	// 2.0 beats
 rest 0x60	// 2.0 beats
 rest 0x60	// 2.0 beats
+async_call goforapflicker
 0x53 0x100020A
 0x23 0x100020A
 0x55 1
@@ -312,6 +313,13 @@ stop
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------
+goforapflicker:
+label 601
+0xAC<2>
+rest 0x30
+goto 601
+stop
+
 // Here is the code for random fade ins and out, 1/15 chance by default. will last 15 and 1/3 beats if I did my math right
 
 playernovisuals:

@@ -200,7 +200,7 @@ sub 4
 0x2D 0
 async_call sumo1
 rest 0x18	// 0.5 beats
-random 4
+random 8
 switch
 	case 0
 		call choosegameslot2
@@ -213,6 +213,18 @@ switch
 	break
 	case 3
 		call choosegameslot2idlealt
+	break
+	case 4
+		call choosegameslot4
+	break
+	case 5
+		call choosegameslot4alt
+	break
+	case 6
+		call choosegameslot1alt
+	break
+	case 7
+		call choosegameslot2alt
 	break
 endswitch
 call didigameover
@@ -230,7 +242,7 @@ speed_relative 0x101, 0x100, 0x200
 call choosegameslot3alt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
-call choosegameslot2alt
+call choosegameslot2idlealt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 call choosegameslot3
@@ -258,7 +270,7 @@ call choosegameslot4
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
-call choosegameslot1
+call choosegameslot1alt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
@@ -520,9 +532,9 @@ stop
 // Replace the files as necessary.
 loadInitialGames:
 set_cellanim 2, u"rom:/cellanim/agbBatter_long.zlib", -1
-set_cellanim 3, u"rom:/cellanim/agbClap_long.zlib", -1
-set_cellanim 4, u"rom:/cellanim/ntrShooting_long.zlib", -1
-set_cellanim 5, u"rom:/cellanim/ctrSumou_long.zlib", -1
+set_cellanim 5, u"rom:/cellanim/agbClap_long.zlib", -1
+set_cellanim 3, u"rom:/cellanim/ntrShooting_long.zlib", -1
+set_cellanim 4, u"rom:/cellanim/ctrSumou_long.zlib", -1
 
 label 0x4D2
 cellanim_busy 2
@@ -573,9 +585,9 @@ rest 1	// 0.020833334 beats
 goto 0x11C5
 label 0x33A
 
-set_layout 5, u"rom:/layout/agbClap_long.zlib", -1
+set_layout 7, u"rom:/layout/agbClap_long.zlib", -1
 label 0x22C5
-layout_busy 5
+layout_busy 7
 if 0
 	goto 0x44A
 endif 
@@ -583,9 +595,9 @@ rest 1	// 0.020833334 beats
 goto 0x22C5
 label 0x44A
 
-set_layout 6, u"rom:/layout/prologue_ctrTeppan.zlib", -1
+set_layout 5, u"rom:/layout/prologue_ctrTeppan.zlib", -1
 label 0x33C5
-layout_busy 6
+layout_busy 5
 if 0
 	goto 0x45A
 endif 
@@ -593,9 +605,9 @@ rest 1	// 0.020833334 beats
 goto 0x33C5
 label 0x45A
 
-set_layout 7, u"rom:/layout/prologue_ctrWoodCat.zlib", -1
+set_layout 6, u"rom:/layout/prologue_ctrWoodCat.zlib", -1
 label 0x44C5
-layout_busy 7
+layout_busy 6
 if 0
 	goto 0x55A
 endif 
@@ -615,9 +627,9 @@ rest 1	// 0.020833334 beats
 goto 0xCCC
 label 0x1111
 
-set_effect 3, u"rom:/effect/agbRabbit.zlib", -1
+set_effect 5, u"rom:/effect/agbRabbit.zlib", -1
 label 0xDDD
-effect_busy 3
+effect_busy 5
 if 0
 	goto 0x2222
 endif 
@@ -625,9 +637,9 @@ rest 1	// 0.020833334 beats
 goto 0xDDD
 label 0x2222
 
-set_effect 4, u"rom:/effect/ntrShooting.zlib", -1
+set_effect 3, u"rom:/effect/ntrShooting.zlib", -1
 label 0xEEE
-effect_busy 4
+effect_busy 3
 if 0
 	goto 0x3333
 endif 
@@ -635,9 +647,9 @@ rest 1	// 0.020833334 beats
 goto 0xEEE
 label 0x3333
 
-set_effect 5, u"rom:/effect/ctrSumou.zlib", -1
+set_effect 4, u"rom:/effect/ctrSumou.zlib", -1
 label 0xFFF
-effect_busy 5
+effect_busy 4
 if 0
 	goto 0x4444
 endif 
@@ -682,9 +694,9 @@ set_sfx 1, u"GROUP_AGB_BATTER"
 rest 0xC	// 0.25 beats
 set_sfx 2, u"GROUP_AGB_PATI"
 rest 0xC	// 0.25 beats
-set_sfx 3, u"GROUP_NTR_SHOOTING"
+set_sfx 4, u"GROUP_NTR_SHOOTING"
 rest 0xC	// 0.25 beats
-set_sfx 4, u"GROUP_SUMOU"
+set_sfx 3, u"GROUP_SUMOU"
 rest 0xC	// 0.25 beats
 sub 3
 0x83 0
@@ -693,15 +705,15 @@ sub 3
 // The loaders in // should only have their // removed if the slot actually has something to be loaded in.
 
 game_cellanim 0, 2
-game_cellanim 0x1, 3
-game_cellanim 0x19, 4
-game_cellanim 0x3C, 5
+game_cellanim 0x1, 5
+game_cellanim 0x19, 3
+game_cellanim 0x3C, 4
 game_effect 0, 2
-game_effect 0x1, 3
-game_effect 0x19, 4
-game_effect 0x3C, 5
+game_effect 0x1, 5
+game_effect 0x19, 3
+game_effect 0x3C, 4
 //game_layout 0, 4
-game_layout 0x1, 5
+game_layout 0x1, 7
 //game_layout 0x19, 6
 //game_layout 0x3C, 7
 //game_model E, 0
@@ -1166,8 +1178,6 @@ call clearslot1
 rest 2
 random 5
 switch
-	
-		
 	case 0
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "ctr_sumou_L_title"
@@ -1263,7 +1273,7 @@ choosegameslot1idlealt:
 0x65<2>
 call clearslot1
 rest 2
-random 6
+random 7
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
@@ -1339,24 +1349,8 @@ switch
 		async_call btsnds
 		rest 0x10	// 0.333 beats
 	break
+	
 	case 4
-		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_tap_A_title"
-		async_call disabletext
-		async_call loadtaptroupe
-		rest 0x60	// 2.0 beats
-		rest 0xC0	// 4.0 beats
-		
-		rest 0xC0	// 4.0 beats
-		rest 0xB0	// 3.5 beats
-		call changeEngineSynchronous
-		engine 0x0C
-		sub 4
-		0x29<2> 
-		async_call taptroupe
-		rest 0x10	// 0.5 beats
-	break
-	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "agb_tap_L_title"
 		async_call disabletext
@@ -1373,6 +1367,23 @@ switch
 		async_call tap
 		rest 0x10	// 0.5 beats
 	break
+	default
+		rest 0x5E	// 2.0 beats
+		0x65<1> 1, "agb_tap_A_title"
+		async_call disabletext
+		async_call loadtaptroupe
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 0x0C
+		sub 4
+		0x29<2> 
+		async_call taptroupe
+		rest 0x10	// 0.5 beats
+	break
 endswitch
 return 
 
@@ -1382,26 +1393,11 @@ call clearslot2
 rest 2
 random 5
 switch
+	
 	case 3
 		random 4
 		switch
-			default
-				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_robot_L_title"
-				async_call disabletext
-				async_call loadscrewbot
-				rest 0x60	// 2.0 beats
-				rest 0xC0	// 4.0 beats
-				
-				rest 0xC0	// 4.0 beats
-				rest 0xB0	// 3.5 beats
-				call changeEngineSynchronous
-				engine 0x2D
-				sub 4
-				0x29<2> 
-				async_call screwbot
-				rest 0x10	// 0.5 beats
-			break
+			
 			case 3
 				rest 0x5E	// 2.0 beats
 				0x65<1> 1, "rvl_robot_L_title"
@@ -1417,6 +1413,23 @@ switch
 				sub 4
 				0x29<2> 
 				async_call screwbot1
+				rest 0x10	// 0.5 beats
+			break
+			default
+				rest 0x5E	// 2.0 beats
+				0x65<1> 1, "rvl_robot_L_title"
+				async_call disabletext
+				async_call loadscrewbot
+				rest 0x60	// 2.0 beats
+				rest 0xC0	// 4.0 beats
+				
+				rest 0xC0	// 4.0 beats
+				rest 0xB0	// 3.5 beats
+				call changeEngineSynchronous
+				engine 0x2D
+				sub 4
+				0x29<2> 
+				async_call screwbot
 				rest 0x10	// 0.5 beats
 			break
 		endswitch
@@ -1519,7 +1532,9 @@ choosegameslot2alt:
 0x65<2>
 call clearslot2
 rest 2
-random 6
+random 5
+switch
+	
 	case 4
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "ntr_pingpong_A_title"
@@ -1535,23 +1550,6 @@ random 6
 		sub 4
 		0x29<2> 
 		async_call tambourine
-		rest 0x10	// 0.5 beats
-	break
-	default
-		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_idol_L_title"
-		async_call disabletext
-		async_call loadfan
-		rest 0x60	// 2.0 beats
-		rest 0xC0	// 4.0 beats
-		
-		rest 0xC0	// 4.0 beats
-		rest 0xB0	// 3.5 beats
-		call changeEngineSynchronous
-		engine 0x15
-		sub 4
-		0x29<2> 
-		async_call fan
 		rest 0x10	// 0.5 beats
 	break
 	case 3
@@ -1670,6 +1668,23 @@ random 6
 		async_call bounce
 		rest 0x10	// 0.5 beats
 	break
+	default
+		rest 0x5E	// 2.0 beats
+		0x65<1> 1, "ntr_idol_L_title"
+		async_call disabletext
+		async_call loadfan
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 0x15
+		sub 4
+		0x29<2> 
+		async_call fan
+		rest 0x10	// 0.5 beats
+	break
 endswitch
 return
 
@@ -1696,23 +1711,7 @@ random 5
 		async_call court
 		rest 0x10	// 0.5 beats
 	break
-	default
-		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_ninja_L_title"
-		async_call disabletext
-		async_call loaddog
-		rest 0x60	// 2.0 beats
-		rest 0xC0	// 4.0 beats
-		
-		rest 0xC0	// 4.0 beats
-		rest 0xB0	// 3.5 beats
-		call changeEngineSynchronous
-		engine 0x16
-		sub 4
-		0x29<2> 
-		async_call dog
-		rest 0x10	// 0.5 beats
-	break
+	
 	case 0
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "ntr_shooting_S_title"
@@ -1763,6 +1762,23 @@ random 5
 		0x29<2> 
 		async_call step
 		rest 0x10	// 0.5 beatswa
+	break
+	default
+		rest 0x5E	// 2.0 beats
+		0x65<1> 1, "ntr_ninja_L_title"
+		async_call disabletext
+		async_call loaddog
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 0x16
+		sub 4
+		0x29<2> 
+		async_call dog
+		rest 0x10	// 0.5 beats
 	break
 endswitch
 return
@@ -2035,30 +2051,7 @@ call clearslot3
 rest 2
 random 5
 switch
-	default
-		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_watch_L_title"
-		async_call disabletext
-		async_call loadmonkeywatch
-		rest 0x60	// 2.0 beats
-		rest 0xC0	// 4.0 beats
-		
-		rest 0xC0	// 4.0 beats
-		rest 0x30	// 1.0 beats
-		rest 0x18	// 0.5 beats
-		play_sfx 0x10002E1
-		rest 0x18	// 0.5 beats
-		rest 0x18	// 0.5 beats
-		play_sfx 0x10002E2
-		rest 0x18	// 0.5 beats
-		rest 0x20	// 0.667 beats
-		call changeEngineSynchronous
-		engine 0x33
-		sub 4
-		0x29<2> 
-		async_call monkeywatch
-		rest 0x10	// 0.333 beats
-	break
+	
 	case 3
 		rest 0xBE	// 4.0 beats
 		0x65<1> 1, "ntr_cameraMan_L_title"
@@ -2132,6 +2125,30 @@ switch
 		async_call somen
 		rest 0x10	// 0.5 beats
 	break
+	default
+		rest 0x5E	// 2.0 beats
+		0x65<1> 1, "rvl_watch_L_title"
+		async_call disabletext
+		async_call loadmonkeywatch
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x18	// 0.5 beats
+		play_sfx 0x10002E1
+		rest 0x18	// 0.5 beats
+		rest 0x18	// 0.5 beats
+		play_sfx 0x10002E2
+		rest 0x18	// 0.5 beats
+		rest 0x20	// 0.667 beats
+		call changeEngineSynchronous
+		engine 0x33
+		sub 4
+		0x29<2> 
+		async_call monkeywatch
+		rest 0x10	// 0.333 beats
+	break
 endswitch
 return
 
@@ -2172,12 +2189,14 @@ switch
 		
 		play_sfx 0x10002E1
 		rest 0x18	// 0.5 beats
-		rest 0x18	// 0.5 beats
-		play_sfx 0x10002E2
 		play_sfx 0x10005FE
 		rest 0x18	// 0.5 beats
-		rest 0x18	// 0.667 beats
+		play_sfx 0x10002E2
+		
+		rest 0x18	// 0.5 beats
 		play_sfx 0x10005FF
+		rest 0x18	// 0.667 beats
+		
 		rest 2
 		call changeEngineSynchronous
 		engine 0x2C
@@ -2186,23 +2205,7 @@ switch
 		async_call bossa
 		rest 0x10	// 0.333 beats
 	break
-	default
-		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_quiz_L_title"
-		async_call disabletext
-		async_call loadquiz
-		rest 0x60	// 2.0 beats
-		rest 0xC0	// 4.0 beats
-		
-		rest 0xC0	// 4.0 beats
-		rest 0xB0	// 3.5 beats
-		call changeEngineSynchronous
-		engine 7
-		sub 4
-		0x29<2> 
-		async_call quiz
-		rest 0x10	// 0.5 beats
-	break
+	
 	case 2
         rest 0x5E    // 2.0 beats
         0x65<1> 1, "ctr_teppan_L_title"
@@ -2255,6 +2258,23 @@ switch
 		sub 4
 		0x29<2> 
 		async_call lockstep
+		rest 0x10	// 0.5 beats
+	break
+	default
+		rest 0x5E	// 2.0 beats
+		0x65<1> 1, "agb_quiz_L_title"
+		async_call disabletext
+		async_call loadquiz
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 7
+		sub 4
+		0x29<2> 
+		async_call quiz
 		rest 0x10	// 0.5 beats
 	break
 endswitch
@@ -7614,36 +7634,30 @@ random 3
 switch
 	case 0
 		async_call countin
-		rest 0x90
+		rest 0x60
+		rest 0x30
 		async_call fourbeatstepprep
-		rest 0x18
-		0x103 1
-		rest 0x18
-		rest 0x90
+		rest 0xC0
 		async_call threebom
 		rest 0xC0
 		async_call fourbeatstepreturn
 	break
 	case 1
 		async_call countin
-		rest 0x90
+		rest 0x60
+		rest 0x30
 		async_call fourbeatstep
-		rest 0x18
-		0x103 1
-		rest 0x18
-		rest 0x90
+		rest 0xC0
 		async_call fourbeatstep
 		rest 0xC0
 		async_call fourbeatstep
 	break
 	case 2
 		async_call countin
-		rest 0x90
-		async_call twobeatstepprep
-		rest 0x18
-		0x103 1
-		rest 0x18
+		rest 0x60
 		rest 0x30
+		async_call twobeatstepprep
+		rest 0x60
 		async_call eightbom
 		rest 0x180
 		async_call twobeatstep
