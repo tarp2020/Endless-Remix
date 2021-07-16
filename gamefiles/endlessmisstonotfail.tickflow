@@ -6839,21 +6839,21 @@ endswitch
 stop 
 
 countin:
-play_sfx 0x10002DF
+play_sfx 0x1000291
 0x106<1> 0
 0x101
 rest 0x30	// 1.0 beats
 0x106<1> 0
 0x101
-play_sfx 0x10002E0
+play_sfx 0x1000291
 rest 0x30	// 1.0 beats
 0x106<1> 0
 0x101
-play_sfx 0x10002E1
+play_sfx 0x1000291
 rest 0x30	// 1.0 beats
 0x106<1> 0
 0x101
-play_sfx 0x10002E2
+play_sfx 0x1000291
 rest 0x30	// 1.0 beats
 stop 
 
@@ -7000,7 +7000,6 @@ stop
 fourbeatstepprep:
 async_call performancecheckfourbeat
 async_call performancecheckfourbeatleg
-async_call tapvoice
 0x100
 rest 0x2F	// 0.5 beats
 0x8E 0
@@ -7660,7 +7659,7 @@ switch
 		rest 0x60
 		async_call eightbom
 		rest 0x180
-		async_call twobeatstep
+		async_call fourbeatstepreturn
 	break
 endswitch
 stop
@@ -12675,8 +12674,13 @@ game_cellanim 3, 2
 stop 
 
 loadpest:
-random 4
+random 5
 switch
+	case 4
+	remove_cellanim 2
+	set_cellanim 2, u"rom:/cellanim/rvlSort_hehe.zlib", -1
+	call cellanim2wait
+	break
 	case 3
 	remove_cellanim 2
 	set_cellanim 2, u"rom:/cellanim/rvlSort_machine.zlib", -1
@@ -15294,8 +15298,13 @@ stop
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 loadfork:
-random 5
+random 6
 switch
+	case 5
+	remove_cellanim 5
+	set_cellanim 5, u"rom:/cellanim/rvlFork_remix9.zlib", -1
+	call cellanim5wait
+	break
 	case 4
 	remove_cellanim 5
 	set_cellanim 5, u"rom:/cellanim/rvlFork_fortnite.zlib", -1
