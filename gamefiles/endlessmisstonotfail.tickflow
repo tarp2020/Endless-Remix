@@ -274,7 +274,7 @@ call choosegameslot1alt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
-call choosegameslot2alt
+call choosegameslot2idlealt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
@@ -298,7 +298,7 @@ call choosegameslot4alt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
-call choosegameslot2idlealt
+call choosegameslot2alt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
@@ -7634,7 +7634,10 @@ switch
 	case 0
 		async_call countin
 		rest 0x60
+		
 		rest 0x30
+		0x103 0
+		0x102 5
 		async_call fourbeatstepprep
 		rest 0xC0
 		async_call threebom
@@ -7644,7 +7647,10 @@ switch
 	case 1
 		async_call countin
 		rest 0x60
+		
 		rest 0x30
+		0x103 0
+		0x102 5
 		async_call fourbeatstep
 		rest 0xC0
 		async_call fourbeatstep
@@ -7654,7 +7660,10 @@ switch
 	case 2
 		async_call countin
 		rest 0x60
+		
 		rest 0x30
+		0x103 0
+		0x102 5
 		async_call twobeatstepprep
 		rest 0x60
 		async_call eightbom
@@ -13109,8 +13118,14 @@ game_cellanim 0x1C, 2
 stop
 
 loadrocket:
-random 3
+random 4
 switch
+	case 3
+	remove_cellanim 2
+	set_cellanim 2, u"rom:/cellanim/rvlRocket_remix08.zlib", -1
+	call cellanim2wait
+	0x2B 0x2E, 3
+	break
 	case 2
 	remove_cellanim 2
 	set_cellanim 2, u"rom:/cellanim/rvlRocket_remix06.zlib", -1
