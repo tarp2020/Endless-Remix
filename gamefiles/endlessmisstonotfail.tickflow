@@ -140,6 +140,7 @@ sub 4
 if 1
 	goto 0x7272
 endif 
+rest 0xC	// 0.25 beats
 async_sub 0x24
 rest 0x18	// 0.5 beats
 // See this for information about game sequences: https://pastebin.com/SyhaZJRt
