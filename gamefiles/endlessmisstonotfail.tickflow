@@ -226,13 +226,13 @@ endswitch
 call didigameover
 call choosegameendless
 call didigameover
-call choosegameslot2
+call choosegameslot4
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 call choosegameslot1alt
 call didigameover
 speed_relative 0x101, 0x100, 0x200
-call choosegameslot4
+call choosegameslot2
 call didigameover
 speed_relative 0x101, 0x100, 0x200
 call choosegameslot3alt
@@ -13081,6 +13081,7 @@ random 9
 switch
 	case 8
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_ranch.zlib", -1
 	call cellanim2wait
 	break
@@ -13110,6 +13111,7 @@ switch
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_strange.zlib", -1
 	call cellanim2wait
 	break
@@ -13344,6 +13346,7 @@ switch
 	call cellanim3wait
 	break
 endswitch
+
 call layout5wait
 set_layout 5, u"rom:/layout/agbClap_BW.zlib", -1
 call layout5wait
@@ -15617,6 +15620,7 @@ switch
 	break 
 endswitch
 
+remove_layout 6
 call layout6wait
 set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
