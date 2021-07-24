@@ -172,6 +172,7 @@ sub 4
 0x29<2> 
 0x2D 0
 async_call clappytrio1
+
 rest 0x18	// 0.5 beats
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
@@ -185,8 +186,8 @@ sub 4
 0x29<2> 
 0x2D 0
 async_call shootemup1
-rest 0x18	// 0.5 beats
 
+rest 0x18	// 0.5 beats
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
@@ -199,6 +200,7 @@ sub 4
 0x29<2> 
 0x2D 0
 async_call sumo1
+
 rest 0x18	// 0.5 beats
 random 5
 switch
@@ -1267,7 +1269,7 @@ choosegameslot1idlealt:
 0x65<2>
 call clearslot1
 rest 2
-random 7
+random 6
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
@@ -1343,8 +1345,7 @@ switch
 		async_call btsnds
 		rest 0x10	// 0.333 beats
 	break
-	
-	case 4
+	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "agb_tap_L_title"
 		async_call disabletext
@@ -1361,7 +1362,6 @@ switch
 		async_call tap
 		rest 0x10	// 0.5 beats
 	break
-	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "agb_tap_A_title"
 		async_call disabletext
@@ -1370,15 +1370,21 @@ switch
 		rest 0xC0	// 4.0 beats
 		
 		rest 0xC0	// 4.0 beats
-		rest 0xB0	// 3.5 beats
-		play_sfx 0x1000291
+		rest 0x30	// 1.0 beats
+		rest 0x18	// 0.5 beats
+		async_sub 0x28
+		rest 0x18	// 0.5 beats
+		rest 0x18	// 0.5 beats
+		
+		rest 0x18	// 0.5 beats
+		rest 0x20	// 0.667 beats
 		call changeEngineSynchronous
 		engine 0x0C
 		sub 4
 		0x29<2> 
 		async_call taptroupe
 		rest 0x10	// 0.5 beats
-	break
+		play_sfx 0x1000291
 endswitch
 return 
 
@@ -1639,7 +1645,7 @@ switch
 		play_sfx 0x10007CB
 		rest 0x16	// 0.5 beats
 		rest 0x20	// 0.5 beats
-		async_call changeEngine
+		call changeEngineSynchronous
 		engine 0x1D
 		sub 4
 		0x29<2> 
@@ -1688,7 +1694,7 @@ choosegameslot2idlealt:
 call clearslot2
 rest 2
 random 5
-	
+switch
 	case 1
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "ctr_fruitbasket_S_title"
@@ -2192,7 +2198,7 @@ switch
 		play_sfx 0x10005FF
 		rest 0x18	// 0.667 beats
 		
-		rest 2
+		rest 8
 		call changeEngineSynchronous
 		engine 0x2C
 		sub 4
@@ -2803,7 +2809,6 @@ switch
 		0x109<2>
 		async_sub 0x56
 		rest 0xC0	// 4.0 beats
-
 	break
 	case 2
 		async_sub 0x56
@@ -2878,7 +2883,7 @@ ding:
 async_call dingsign
 rest 0x90
 rest 0x18
-play_sfx 0x10003DF
+0x40<1> 0x10003DF, 0x200
 rest 0x18
 async_sub 0x5D
 stop
@@ -3033,33 +3038,44 @@ fill:
 rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1
-async_sub 0x63
 unrest 0x18
 random 4
 switch
 	case 0
 		async_call S
-		rest 0xC0   // 4.0 beats
+		rest 0x18
+		async_sub 0x63
+		rest 0x90   // 4.0 beats
+		rest 0x18
 		rest 0xC0   // 4.0 beats
 		async_call M
 	break
 	case 1
 		async_call L
-		rest 0xC0   // 4.0 beats
+		rest 0x18
+		async_sub 0x63
+		rest 0x90   // 4.0 beats
+		rest 0x18
 		rest 0xC0   // 4.0 beats
 		rest 0x60  // 2.0 beats
 		async_call S
 	break
 	case 2
 		async_call S
-		rest 0xC0   // 4.0 beats
+		rest 0x18
+		async_sub 0x63
+		rest 0x90   // 4.0 beats
+		rest 0x18
 		async_call S
 		rest 0xC0   // 4.0 beats
 		async_call S
 	break
 	case 3
 		async_call M
-		rest 0xC0   // 4.0 beats
+		rest 0x18
+		async_sub 0x63
+		rest 0x90   // 4.0 beats
+		rest 0x18
 		rest 0xC0   // 4.0 beats
 		async_call M
 	break
@@ -3572,7 +3588,6 @@ async_sub 0x58
 stop
 
 ohh:
-
 0x102<2> 
 play_sfx 0x1000EE3
 async_sub 0x60
@@ -3630,7 +3645,28 @@ unrest 6
 random 5
 switch
 	case 5
-		
+		rest 0x30
+		async_call isuppose
+		rest 0x30
+		0x10E 0
+		rest 0x30
+		rest 0x30
+		0x10F 0
+		rest 0x30
+		0x10F 0
+		rest 0x30
+		0x10F 0
+		rest 0x30
+		async_call isuppose
+		rest 0x30
+		0x10E 0
+		rest 0x30
+		rest 0x30
+		0x10F 0
+		rest 0x30
+		0x10F 0
+		rest 0x30
+		0x10F 0
 	break
 	case 4
 		async_call Yayaya
@@ -3812,8 +3848,8 @@ stop
 
 claplong:
 0x8F 3
-rest 0x8	// 0.333 beats
 0x105<2> 0x503122
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -3893,8 +3929,8 @@ stop
 
 clapremix:
 0x8F 3
-rest 0x8	// 0.333 beats
 0x105<2> 0x509CDB
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -3974,8 +4010,8 @@ stop
 
 claparrange:
 0x8F 3
-rest 0x8	// 0.333 beats
 0x105<2> 0x503074
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -4055,8 +4091,8 @@ stop
 
 clapshort:
 0x8F 3
-rest 0x8	// 0.333 beats
 0x105<2> 0x5031CD
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -4205,11 +4241,11 @@ stop
 
 race:
 0x8F 3
-rest 0x8	// 0.333 beats
 0x102 1
 0x105 2
 0x101 1
 0x106 0x30, 0
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 unrest 0x60
@@ -5524,12 +5560,12 @@ stop
 
 glee:
 0x8F 3
-rest 0x10	// 0.333 beats
 0x104 0, 0, 0x1000DAF, 0x3C, -3
 0x104 1, 0, 0x1000DAF, 0x3C, -1
 0x104 2, 0, 0x1000DAF, 0x3C, 3
 0x104 2, 1, 0x1000DB0, 0x64, 2
 0x101<0>
+rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1
 0x10D
@@ -5906,7 +5942,7 @@ async_call sub59
 stop
 
 rocket:
-rest 0x10
+0x8F 3
 0x105<1>
 0x106 1
 0x10C 2
@@ -5915,6 +5951,7 @@ rest 0x10
 0x107<3> 0
 0x107<4> 0x1E
 0x107 0xA
+rest 0x10
 fade<1> 1, 1, 1
 input 1
 random 3
@@ -6061,6 +6098,7 @@ rest 0x30	// 1.0 beats
 stop 
 
 dazzle:
+0x8F 3
 rest 0x10
 fade<1> 1, 1, 1
 input 1
@@ -6144,11 +6182,12 @@ endswitch
 stop
 
 punch:
-rest 0x8
-rest 0x8
+0x8F 3
 0x102<1>
 0x10B 1
 0x10A 1
+rest 0x8
+rest 0x8
 fade<1> 1, 1, 1
 async_call punchbeat
 input 1
@@ -6256,12 +6295,11 @@ switch
 		rest 0x18	// 0.5 beats
 		0x100<3> 
 		0x102 
-		rest 0xC	// 0.25 beats
+		rest 0x18	// 0.25 beats
 		0x103 1
 		0x107 0x505717, 0
 		0x107<1> 0x50573A
 		0x105<1> 
-		rest 0xC	// 0.25 beats
 		rest 0x30	// 1.0 beats
 		rest 0x30	// 1.0 beats
 		rest 0x30	// 1.0 beats
@@ -6329,13 +6367,12 @@ switch
 		0x102
 		rest 0x18	// 0.5 beats
 		 
-		rest 0xC	// 0.25 beats
+		rest 0x24	// 0.25 beats
 		0x103 1
 		0x107 0x50650B, 0
 		0x107<1> 0x50652C
 		0x105<1> 
-		rest 0xC	// 0.25 beats
-		rest 0x30	// 1.0 beats
+		rest 0x24	// 1.0 beats
 		rest 0x30	// 1.0 beats
 		rest 0x30	// 1.0 beats
 		0x104 1
@@ -6405,10 +6442,10 @@ rest 0xC	// 0.25 beats
 stop
 
 munch:
-rest 0x8
 0x107 1, 0
 0x106<1>
 0x104<1>
+rest 0x8
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -6912,6 +6949,8 @@ rest 0x18	// 0.5 beats
 0x104
 rest 0x18	// 0.5 beats
 0x106<1> 0
+rest 5
+
 rest 0x18	// 0.5 beats
 0x104
 rest 0x18	// 0.5 beats
@@ -6929,7 +6968,9 @@ stop
 performancecheckfourbeatleg:
 0xA2
 0x9F<5> 2
-rest 0x2F	// 0.5 beats
+rest 0x18
+0x104
+rest 0x6	// 0.5 beats
 0xA2<2> 
 if 0
  0x103 1
@@ -6941,11 +6982,15 @@ rest 3	// <0.125 beats
 if 0
  0x103 1
 endif
-rest 0x2D	// >0.875 beats
+rest 0x18	// >0.875 beats
+0x106<1> 0
+rest 5
 
 0xA2
 0x9F<5> 2
-rest 0x2F	// 0.5 beats
+rest 0x18
+0x104
+rest 0x6	// 0.5 beats
 0xA2<2> 
 if 0
  0x103 1
@@ -6957,7 +7002,9 @@ rest 3	// <0.125 beats
 if 0
  0x103 1
 endif
-rest 0x2D	// >0.875 beats
+rest 0x18	// >0.875 beats
+0x106<1> 0
+rest 5
 stop 
 
 performancecheckfourbeatlegreturn:
@@ -6995,12 +7042,11 @@ rest 0x2D	// >0.875 beats
 stop 
 
 fourbeatstep:
-async_call performancecheckfourbeat
 async_call performancecheckfourbeatleg
 0x100
 rest 0x2F	// 0.5 beats
 0x8E 0
-0x103 1
+//0x103 1
 rest 1	// 0.5 beats
 0x102 4
 0x100 
@@ -7021,12 +7067,11 @@ rest 0x2D	// >0.875 beats
 stop 
 
 fourbeatstepprep:
-async_call performancecheckfourbeat
 async_call performancecheckfourbeatleg
 0x100
 rest 0x2F	// 0.5 beats
 0x8E 0
-0x103 1
+//0x103 1
 rest 1	// 0.5 beats
 0x102 4
 0x100
@@ -7056,7 +7101,7 @@ async_call tapvoice
 0x100
 rest 0x2F	// 0.5 beats
 0x8E 0
-0x103 1
+//0x103 1
 rest 1	// 0.5 beats
 0x102 4
 0x100 
@@ -7077,7 +7122,6 @@ rest 0x2D	// >0.875 beats
 stop 
 
 fourbeatstepreturn:
-async_call performancecheckfourbeat
 async_call performancecheckfourbeatlegreturn
 async_call tapvoicewithslap
 0x100
@@ -7145,7 +7189,9 @@ stop
 performancechecktwobeatleg:
 0xA2
 0x9F<5> 2
-rest 0x2F	// 0.5 beats
+rest 0x18
+0x104
+rest 0x6	// 0.5 beats
 0xA2<2> 
 if 0
  0x103 1
@@ -7157,7 +7203,9 @@ rest 3	// <0.125 beats
 if 0
  0x103 1
 endif
-rest 0x2D	// >0.875 beats
+rest 0x18	// >0.875 beats
+0x106<1> 0
+rest 5
 stop 
 
 twobeatstep:
@@ -7177,7 +7225,6 @@ rest 0x2D	// >0.875 beats
 stop
 
 twobeatstepprep:
-async_call performancechecktwobeat
 async_call performancechecktwobeatleg
 0x100
 rest 0x2F	// 0.5 beats
@@ -7196,7 +7243,6 @@ rest 8	// <0.167 beats
 stop 
 
 twobeatstepprepreturn:
-async_call performancechecktwobeat
 async_call performancechecktwobeatleg
 async_call tapvoicewithslap
 0x100
@@ -7652,78 +7698,53 @@ zoom 3, 0x168, 0x168
 pan 3, 8, 0
 fade<1> 1, 1, 1
 input 1
-random 3
+0x103 0
+0x102 0
+random 4
 switch
 	case 0
-		0x106<1> 0
-		0x101
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		0x103 1
-		0x102 4
-		async_call fourbeatstepprep
-		rest 0x30	// 1.0 beats
+		async_call fourbeatstep
 		rest 0x90
+		async_call twobeatstepprep
+		rest 0x60
+		async_call zerobom
+		rest 0x60
+		async_call twobeatstepprepreturn
+		rest 0x60
 		async_call threebom
 		rest 0xC0
 		async_call fourbeatstepreturn
 	break
 	case 1
-		0x106<1> 0
-		0x101
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		0x103 1
-		0x102 4
-
-		async_call fourbeatstep
+		async_call fourbeatstepprep
+		rest 0x90
+		async_call fivebomnostar
 		rest 0xC0
-		async_call fourbeatstep
-		rest 0xC0
-		async_call fourbeatstep
+		rest 0x90
+		async_call twobeatstepprepreturn
+		rest 0x60
+		async_call zerobom
+		rest 0x60
+		async_call fourbeatstepreturn
 	break
 	case 2
-		0x106<1> 0
-		0x101
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		rest 0x30	// 1.0 beats
-		0x106<1> 0
-		0x101
-		play_sfx 0x1000291
-		0x103 1
-		0x102 4
+		async_call fourbeatstep
+		rest 0xC0
+		async_call fourbeatstep
+		rest 0xC0
+		async_call fourbeatstep
+		rest 0xC0
+		async_call fourbeatstep
+		rest 0xC0
+	break
+	case 3
 		async_call twobeatstepprep
 		rest 0x60
 		async_call eightbom
 		rest 0x180
-		async_call fourbeatstepreturn
+		async_call twobeatstepprepreturn
+		rest 0x60
+		async_call zerobom
 	break
 endswitch
 stop
@@ -7852,7 +7873,6 @@ stop
 
 bird:
 0x8F 3
-rest 0x10	// 0.333 beats
 random 2
 switch
 	case 0
@@ -7860,9 +7880,13 @@ switch
 	break
 	case 1
 		0x107 1
+		0x101
+		0x102<5> 9
+		0x102<5> 9
 		0x102<5> 9
 	break
 endswitch
+rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1 
 input 1
 random 3
@@ -8180,15 +8204,10 @@ rest 0x18	// 0.5 beats
 0x100 0, 0x18
 0x101 0
 rest 0x18	// HIT
-play_sfx 0x10011A5
 rest 0x18	// 0.5 beats
 0x106
 0x100 0, 0x18
 0x101 1
-rest 0x18	// HIT
-rest 0x18	// 0.5 beats
-0x100 0, 0x18
-0x101 0
 rest 0x18	// HIT
 rest 0x18	// 0.5 beats
 play_sfx 0x100028D
@@ -8201,7 +8220,6 @@ sword:
 rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1		
-		0x100 0x60
 		play_sfx 0x1000AB8
 		rest 0xC0	// 4.0 beats
 		rest 0x30	// 1.0 beats
@@ -8232,8 +8250,8 @@ stop
 
 wrestle:
 0x8F 3
-rest 0x10	// 0.333 beats
 0x10C<1>
+rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1
 async_call wrestlebeat
@@ -8503,7 +8521,7 @@ rest 0x30	// 1.0 beats
 0x105<0x63> 
 stop 
 sub81:
-play_sfx 0x10003DE
+0x40<1> 0x10003DE, 0x200
 stop 
 sub88:
 rest 0x18	// 0.5 beats
@@ -9086,7 +9104,7 @@ unrest 6
 random 3
 switch
 	case 0
-		unrest 0xC
+		rest 0xC
 		0x102<0>
 		0x103<2> 1
 		async_sub 0x62
@@ -9100,7 +9118,7 @@ switch
 		async_sub 0x63
 	break
 	case 1
-		unrest 0xC
+		rest 0xC
 		0x102<0>
 		0x103<2> 1
 		async_sub 0x62
@@ -10211,14 +10229,14 @@ return
 
 quiz:
 0x8F 3
-rest 0x10	// 0.333 beats
 0x102 
 0x102<1> 
 0x101<1> 
+rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 0
 
-random 2
+random 3
 switch
 	case 0
 		0x101<2>
@@ -10320,18 +10338,75 @@ switch
 			play_sfx 0x1000B8F
 		endif
 	break
+	case 2
+		0x65<2>
+		
+		0x105<1>
+		rest 0x18	// 1.0 beats
+		0x65<1> 0xB, "remix_07_quiz_00"
+		rest 0x18
+		rest 0x30	// 1.0 beats
+		0x101<1>
+		0x65<2>
+		rest 0x18	// 0.5 beats
+		0x101<2>
+		rest 0x18	// 0.5 beats
+		0x101<3>
+		rest 0x18	// 0.5 beats
+		0x101<2>
+		rest 0x18	// 0.5 beats
+		0x105<2>
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		0x65<1> 0xB, "remix_07_quiz_01"
+		0x101
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+
+		0x105
+		input 1
+		0x100<1>
+		0x65<2>
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		input 0
+		0x105<2>
+		0x65<1> 0xB, "remix_07_quiz_02"
+		play_sfx 0x1000B8C
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		0x65<2>
+		rest 0x30	// 1.0 beats
+		0x102<3> 
+		0x102<2>
+		if 1
+			0x101<5> 
+			0x100<3> 
+			play_sfx 0x1000B8E
+			0x65<1> 0xB, "remix_07_quiz_hi"
+			0x105<3> 0x1E
+		else
+			0x101<6> 
+			0x100<4> 
+			play_sfx 0x1000B8F
+			0x65<1> 0xB, "remix_07_quiz_ng"
+			0x105<3> 0
+		endif
+	break
 endswitch
 stop 
 
 tango:
 0x8F 3
-rest 0x10	// 0.333 beats
 0x10C 0, -0x320, 0x5DC
 0x10D<1> 
 0x10C<1> 0x1F4, -0x320, 0x5DC, 0x90
 0x107<3> 
 0x108<4> 
 0x103 3
+rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1
 random 2
@@ -10758,8 +10833,8 @@ endswitch
 stop
 
 rap6:
-rest 0x8	// 0.333 beats
 0x10E
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -11062,10 +11137,10 @@ endif
 return 
 
 spook:
-rest 0x8	// 0.333 beats
 0x101<1> 0, 0
 0x104<1> 0
 0x107<1> 0
+rest 0x8	// 0.333 beats
 rest 0x8
 fade<1> 1, 1, 1
 input 1
@@ -11948,7 +12023,7 @@ goto 9045
 stop
 
 herewego:
-play_sfx 0x10003E0
+0x40<1> 0x10003E1, 0x200
 stop
 
 dog:
@@ -11977,6 +12052,7 @@ switch
 		rest 0x60
 		0x100 0x30, 7, 0xA
 		rest 0x60
+	break
 	case 6
 		rest 0x30	// 1.0 beats
 		0x100 0x30, 7, 0xA
@@ -12231,31 +12307,35 @@ stop
 //SLOT 1-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------
 loadkaratesenior:
-remove_cellanim 4
 random 5
 switch
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_4.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_sans.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_tempo.zlib", -1
 	call cellanim4wait
 	break
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/winKarate_Mania.zlib", -1
 	call cellanim4wait
 	break
 	case 4
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_R7.zlib", -1
 	call cellanim4wait
 	break
@@ -12265,6 +12345,7 @@ set_layout 6, u"rom:/layout/prologue_ctrTeppan.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -12284,41 +12365,47 @@ game_effect 0x28, 4
 stop
 
 loadkaratereturns:
-remove_cellanim 4
 random 6
 switch
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbKarate_ar.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/winKarate_Mania.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_0.zlib", -1
 	call cellanim4wait
 	break
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_1.zlib", -1
 	call cellanim4wait
 	break
 	case 4
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_remix00.zlib", -1
 	call cellanim4wait
 	break
 	case 5
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_tempo.zlib", -1
 	call cellanim4wait
 	break
 	case 6
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_mario3.zlib", -1
 	call cellanim4wait
 	break
@@ -12328,6 +12415,7 @@ set_layout 6, u"rom:/layout/prologue_ctrTeppan.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -12347,11 +12435,11 @@ game_effect 0x28, 4
 stop
 
 loadkaratereturns8:
-remove_cellanim 4
 random 1
 switch
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_serious.zlib", -1
 	call cellanim4wait
 	break
@@ -12361,6 +12449,7 @@ set_layout 6, u"rom:/layout/prologue_ctrTeppan.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -12380,41 +12469,47 @@ game_effect 0x28, 4
 stop
 
 loadkaratecombo:
-remove_cellanim 4
 random 7
 switch
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_remix9.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_3.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_remix09.zlib", -1
 	call cellanim4wait
 	break
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_remix09_cat.zlib", -1
 	call cellanim4wait
 	break
 	case 4
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_tempo.zlib", -1
 	call cellanim4wait
 	break
 	case 5
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_R7.zlib", -1
 	call cellanim4wait
 	break
 	case 6
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/winKarate_Mania.zlib", -1
 	call cellanim4wait
 	break
@@ -12424,6 +12519,7 @@ set_layout 6, u"rom:/layout/prologue_ctrTeppan.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -12448,30 +12544,36 @@ random 4
 switch
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_remix9.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_remix6.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_2.zlib", -1
 	call cellanim4wait
 	break
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlKarate_tempo.zlib", -1
 	call cellanim4wait
 	break
 endswitch
+
 call layout6wait
 set_layout 6, u"rom:/layout/prologue_ctrTeppan.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -12495,31 +12597,37 @@ random 6
 switch
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlGolf_repainted.zlib", -1
 	call cellanim2wait
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlGolf_remix1.zlib", -1
 	call cellanim2wait
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlGolf_remix09.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlGolf_long.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlGolf_arrange.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlGolf_remixLED.zlib", -1
 	call cellanim2wait
 	break
@@ -12553,32 +12661,38 @@ random 6
 switch
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlManju_remix8.zlib", -1
 	call cellanim2wait
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlManju_arrange_kor.zlib", -1
 	call cellanim2wait
 	goto 5555
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlManju_remix3.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlManju_remix03.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlManju_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlManju_arrange.zlib", -1
 	call cellanim2wait
 	goto 5555
@@ -12630,26 +12744,31 @@ random 5
 switch
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSamurai_remix8.zlib", -1
 	call cellanim2wait
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSamurai_long_kor.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSamurai_remix.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSamurai_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSamurai_arrange.zlib", -1
 	call cellanim2wait
 	break
@@ -12678,41 +12797,54 @@ random 6
 switch
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlMuscle_ntr_remix09.zlib", -1
 	call cellanim2wait
+	0x2B 0x2A, 3
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlMuscle_mario3.zlib", -1
 	call cellanim2wait
+	0x2B 0x2A, 3
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlMuscle_remix01.zlib", -1
 	call cellanim2wait
-	goto 822
+	0x2B 0x2A, 8
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlMuscle_short.zlib", -1
 	call cellanim2wait
+	0x2B 0x2A, 1
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlMuscle_long.zlib", -1
 	call cellanim2wait
+	0x2B 0x2A, 3
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlMuscle_arrange.zlib", -1
 	call cellanim2wait
+	0x2B 0x2A, 5
 	break
 endswitch
 
+remove_layout 4
 call layout4wait
 set_layout 4, u"rom:/layout/rvlMuscle.zlib", -1
 call layout4wait
 
+remove_effect 2
 call effect2wait
 set_effect 2, u"rom:/effect/rvlMuscle.zlib", -1
 call effect2wait
@@ -12726,31 +12858,6 @@ rest 0xC	// 0.25 beats
 game_cellanim 0x2A, 2
 game_effect 0x2A, 2
 game_layout 0x2A, 4
-0x2B 0x2A, 3
-goto 726
-
-label 822
-call layout4wait
-set_layout 4, u"rom:/layout/rvlMuscle.zlib", -1
-call layout4wait
-
-call effect2wait
-set_effect 2, u"rom:/effect/rvlMuscle.zlib", -1
-call effect2wait
-
-remove_sfx 1
-rest 0xC	// 0.25 beats
-sub 3
-set_sfx 1, u"GROUP_MUSCLE"
-rest 0xC	// 0.25 beats
-
-game_cellanim 0x2A, 2
-game_effect 0x2A, 2
-game_layout 0x2A, 4
-0x2B 0x2A, 8
-goto 726
-
-label 726
 stop
 
 loadtweezer:
@@ -12758,31 +12865,37 @@ random 6
 switch
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbHair_troll.zlib", -1
 	call cellanim2wait
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbHair_arrange.zlib", -1
 	call cellanim2wait
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbHair_tempo.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbHair_remix01.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbHair_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbHair_short.zlib", -1
 	call cellanim2wait
 	break
@@ -12811,26 +12924,31 @@ random 5
 switch
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSort_hehe.zlib", -1
 	call cellanim2wait
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSort_machine.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSort_remix04.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSort_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlSort_arrange.zlib", -1
 	call cellanim2wait
 	break
@@ -12864,31 +12982,37 @@ random 6
 switch
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrShugyo_arrangeday.zlib", -1
 	call cellanim2wait
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrShugyo_r4ds.zlib", -1
 	call cellanim2wait
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrShugyo_remix7.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrShugyo_arrange.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrShugyo_wario.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrShugyo_long.zlib", -1
 	call cellanim2wait
 	break
@@ -12917,16 +13041,19 @@ random 3
 switch
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlFishing_fortnite.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlFishing_remix05.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlFishing_v0.zlib", -1
 	call cellanim2wait
 	break
@@ -12959,21 +13086,25 @@ switch
 	break
 	case 7
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_piggy.zlib", -1
 	call cellanim2wait
 	break
 	case 6
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_wario.zlib", -1
 	call cellanim2wait
 	break
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_remix7.zlib", -1
 	call cellanim2wait
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_remix5.zlib", -1
 	call cellanim2wait
 	break
@@ -12984,25 +13115,31 @@ switch
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_arrange.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbTap_remix05.zlib", -1
 	call cellanim2wait
 	break
 endswitch
+
 remove_layout 4
+call layout4wait
 set_layout 4, u"rom:/layout/agbTap.zlib", -1
 call layout4wait
 
 remove_effect 2
+call effect4wait
 set_effect 2, u"rom:/effect/agbTap.zlib", -1
 call effect2wait
 
@@ -13023,20 +13160,24 @@ random 2
 switch
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlTap_remix07.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlTap_long.zlib", -1
 	call cellanim2wait
 	break
 endswitch
 remove_layout 4
+call layout4wait
 set_layout 4, u"rom:/layout/rvlTap.zlib", -1
 call layout4wait
 
 remove_effect 2
+call effect2wait
 set_effect 2, u"rom:/effect/rvlKarate.zlib", -1
 call effect2wait
 
@@ -13063,16 +13204,19 @@ random 3
 switch
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlBatting_remix8.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlBatting_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlBatting_remix05.zlib", -1
 	call cellanim2wait
 	break
@@ -13083,6 +13227,7 @@ set_layout 4, u"rom:/layout/agbTap.zlib", -1
 call layout4wait
 
 remove_effect 2
+call effect2wait
 set_effect 2, u"rom:/effect/rvlBatting.zlib", -1
 call effect2wait
 
@@ -13102,16 +13247,19 @@ random 3
 switch 
 	case 2
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/agbTono_long_kor.zlib", -1
 	call cellanim5wait
 	break
 	case 1
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/agbTono_long.zlib", -1
 	call cellanim5wait
 	break
 	case 0
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/agbTono_arrange.zlib", -1
 	call cellanim5wait
 	break
@@ -13139,11 +13287,13 @@ random 2
 switch 
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbNightWalk_v0.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbNightWalk_v1.zlib", -1
 	call cellanim3wait
 	break
@@ -13171,21 +13321,25 @@ random 4
 switch 
 	case 3
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrSyncro_long.zlib", -1
 	call cellanim3wait
 	break
 	case 2
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrSyncro_arrange.zlib", -1
 	call cellanim3wait
 	break
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrSyncro_remix4.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrSyncro_remix9.zlib", -1
 	call cellanim3wait
 	break
@@ -13213,16 +13367,19 @@ random 3
 switch
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrAssemble2_v0.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrAssemble_arrange.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrAssemble.zlib", -1
 	call cellanim2wait
 	break
@@ -13251,24 +13408,28 @@ random 4
 switch
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlRocket_remix08.zlib", -1
 	call cellanim2wait
 	0x2B 0x2E, 3
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlRocket_remix06.zlib", -1
 	call cellanim2wait
 	0x2B 0x2E, 3
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlRocket_v0.zlib", -1
 	call cellanim2wait
 	0x2B 0x2E, 3
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/rvlRocket_v0.zlib", -1
 	call cellanim2wait
 	0x2B 0x2E, 0
@@ -13297,16 +13458,19 @@ random 3
 switch
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbRat_remix7.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbRat_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/agbRat_remix03.zlib", -1
 	call cellanim2wait
 	break
@@ -13335,36 +13499,43 @@ random 7
 switch
 	case 6
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow4head.zlib", -1
 	call cellanim2wait
 	break
 	case 5
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow_remix7classic.zlib", -1
 	call cellanim2wait
 	break
 	case 4
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow_remix7.zlib", -1
 	call cellanim2wait
 	break
 	case 3
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow_arrangeclassic.zlib", -1
 	call cellanim2wait
 	break
 	case 2
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow_arrange.zlib", -1
 	call cellanim2wait
 	break
 	case 1
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow_classic.zlib", -1
 	call cellanim2wait
 	break
 	case 0
 	remove_cellanim 2
+	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ntrBoxShow_v0.zlib", -1
 	call cellanim2wait
 	break
@@ -13374,6 +13545,7 @@ call layout4wait
 set_layout 4, u"rom:/layout/agbTap.zlib", -1
 call layout4wait
 
+remove_effect 2
 call effect2wait
 set_effect 2, u"rom:/effect/ntrBoxShow.zlib", -1
 call effect2wait
@@ -13393,26 +13565,31 @@ loadsumo:
 random 3
 switch 
 	case 2
+	remove_cellanim 2
 	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ctrSumou_blursed.zlib", -1
 	call cellanim2wait
 	break
 	case 1
+	remove_cellanim 2
 	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ctrSumou_long.zlib", -1
 	call cellanim2wait
 	break
 	case 0
+	remove_cellanim 2
 	call cellanim2wait
 	set_cellanim 2, u"rom:/cellanim/ctrSumou_remixLED.zlib", -1
 	call cellanim2wait
 	break
 endswitch
+
 call layout4wait
 set_layout 4, u"rom:/layout/agbTap.zlib", -1
 call layout4wait
 
 remove_effect 2
+call effect2wait
 set_effect 2, u"rom:/effect/ctrSumou.zlib", -1
 call effect2wait
 
@@ -13435,36 +13612,43 @@ random 7
 switch
 	case 6
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_long.zlib", -1
 	call cellanim3wait
 	break
 	case 5
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_R7.zlib", -1
 	call cellanim3wait
 	break
 	case 4
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_remix07.zlib", -1
 	call cellanim3wait
 	break
 	case 3
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_remix09.zlib", -1
 	call cellanim3wait
 	break
 	case 2
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_arrange.zlib", -1
 	call cellanim3wait
 	break
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_v1.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBook_tutorial.zlib", -1
 	call cellanim3wait
 	break
@@ -13493,36 +13677,43 @@ random 7
 switch 
 	case 6
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_fortnite.zlib", -1
 	call cellanim3wait
 	break
 	case 5
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_remix8.zlib", -1
 	call cellanim3wait
 	break
 	case 4
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_remix00.zlib", -1
 	call cellanim3wait
 	break
 	case 3
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_short.zlib", -1
 	call cellanim3wait
 	break
 	case 2
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_crazy.zlib", -1
 	call cellanim3wait
 	break
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_long.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/rvlBadminton_remix03.zlib", -1
 	call cellanim3wait
 	break
@@ -13551,31 +13742,37 @@ random 6
 switch 
 	case 5
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrShooting_remix9.zlib", -1
 	call cellanim3wait
 	break
 	case 4
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrShooting_long.zlib", -1
 	call cellanim3wait
 	break
 	case 3
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrShooting_short.zlib", -1
 	call cellanim3wait
 	break
 	case 2
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrShooting_arrange.zlib", -1
 	call cellanim3wait
 	break
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrShooting_remix2.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrShooting_v1.zlib", -1
 	call cellanim3wait
 	break
@@ -13586,6 +13783,7 @@ set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
 remove_effect 3
+call effect3wait
 set_effect 3, u"rom:/effect/ntrShooting.zlib", -1
 call effect3wait
 
@@ -13605,21 +13803,25 @@ random 4
 switch
 	case 3
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRobot_v1.zlib", -1
 		call cellanim3wait
 	break
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRobot_v0_jpn.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRobot_remix09.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRobot_v0.zlib", -1
 		call cellanim3wait
 	break
@@ -13644,9 +13846,10 @@ stop
 
 loadscrewbot1:
 
-		remove_cellanim 3
-		set_cellanim 3, u"rom:/cellanim/rvlRobot_remix1.zlib", -1
-		call cellanim3wait
+remove_cellanim 3
+call cellanim3wait
+set_cellanim 3, u"rom:/cellanim/rvlRobot_remix1.zlib", -1
+call cellanim3wait
 
 call layout5wait
 set_layout 5, u"rom:/layout/rvlRap.zlib", -1
@@ -13669,9 +13872,11 @@ stop
 loadclapshort:
 
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_short.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_short.zlib", -1
 		call layout5wait
 
@@ -13693,9 +13898,11 @@ stop
 loadclaparrange:
 
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_arrange.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_arrange.zlib", -1
 		call layout5wait
 
@@ -13717,9 +13924,11 @@ stop
 loadclapremix:
 
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_remix02.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_remix.zlib", -1
 		call layout5wait
 
@@ -13743,49 +13952,61 @@ random 6
 switch
 	case 5
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_party.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_long.zlib", -1
 		call layout5wait
 	break
 	case 4
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_mario.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_mario.zlib", -1
 		call layout5wait
 	break
 	case 3
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_wario.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_long.zlib", -1
 		call layout5wait
 	break
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_BW.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_BW.zlib", -1
 		call layout5wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_tempo.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_tempo.zlib", -1
 		call layout5wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbClap_long.zlib", -1
 		call cellanim3wait
 		remove_layout 5
+		call layout5wait
 		set_layout 5, u"rom:/layout/agbClap_long.zlib", -1
 		call layout5wait
 	break
@@ -13811,16 +14032,19 @@ random 3
 switch
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlTambourine_remix09.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlTambourine_remix02.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlTambourine_v0.zlib", -1
 		call cellanim3wait
 	break
@@ -13831,6 +14055,7 @@ set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
 remove_effect 3
+call effect3wait
 set_effect 3, u"rom:/effect/rvlKarate.zlib", -1
 call effect3wait
 
@@ -13850,31 +14075,37 @@ random 6
 switch
 	case 5
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ntrIdol_cute.zlib", -1
 		call cellanim3wait
 	break
 	case 4
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ntrIdol_r1ds.zlib", -1
 		call cellanim3wait
 	break
 	case 3
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ntrIdol_remix07.zlib", -1
 		call cellanim3wait
 	break
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ntrIdol_long.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ntrIdol_arrange.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ntrIdol_remix03.zlib", -1
 		call cellanim3wait
 	break
@@ -13885,6 +14116,7 @@ set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
 remove_effect 3
+call effect3wait
 set_effect 3, u"rom:/effect/ntrIdol.zlib", -1
 call effect3wait
 
@@ -13904,31 +14136,37 @@ random 6
 switch
 	case 5
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrStep_neon.zlib", -1
 		call cellanim3wait
 	break
 	case 4
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrStep_beta.zlib", -1
 		call cellanim3wait
 	break
 	case 3
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrStep_wario.zlib", -1
 		call cellanim3wait
 	break
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrStep_remix00.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrStep_long.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrStep_short.zlib", -1
 		call cellanim3wait
 	break
@@ -13938,7 +14176,7 @@ call layout5wait
 set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
-remove_effect 3
+call effect3wait
 set_effect 3, u"rom:/effect/ntrShooting.zlib", -1
 call effect3wait
 
@@ -13957,21 +14195,25 @@ random 4
 switch
 	case 3
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbGhost_arrange.zlib", -1
 		call cellanim3wait
 	break
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbGhost_short.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbGhost_long.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/agbGhost_remix04.zlib", -1
 		call cellanim3wait
 	break
@@ -13981,7 +14223,7 @@ call layout5wait
 set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
-remove_effect 3
+call effect3wait
 set_effect 3, u"rom:/effect/ntrShooting.zlib", -1
 call effect3wait
 
@@ -13997,10 +14239,12 @@ stop
 
 loadrap6:
 remove_cellanim 3
+call cellanim3wait
 set_cellanim 3, u"rom:/cellanim/rvlRap_remix06.zlib", -1
 call cellanim3wait
 
 remove_layout 5
+call layout5wait
 set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
@@ -14024,22 +14268,26 @@ random 3
 switch
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRap_v1.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRap_remix09.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/rvlRap_v0.zlib", -1
 		call cellanim3wait
 	break
 endswitch
 
 remove_layout 5
+call layout5wait
 set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
@@ -14063,26 +14311,31 @@ random 5
 switch
 	case 4
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrFruitbasket_remix09.zlib", -1
 		call cellanim3wait
 	break
 	case 3
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrFruitbasket_fortnite.zlib", -1
 		call cellanim3wait
 	break
 	case 2
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrFruitbasket_remix01.zlib", -1
 		call cellanim3wait
 	break
 	case 1
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrFruitbasket_long.zlib", -1
 		call cellanim3wait
 	break
 	case 0
 		remove_cellanim 3
+		call cellanim3wait
 		set_cellanim 3, u"rom:/cellanim/ctrFruitbasket_short.zlib", -1
 		call cellanim3wait
 	break
@@ -14093,6 +14346,7 @@ set_layout 5, u"rom:/layout/rvlRap.zlib", -1
 call layout5wait
 
 remove_effect 3
+call effect3wait
 set_effect 3, u"rom:/effect/ctrFruitbasket.zlib", -1
 call effect3wait
 
@@ -14112,31 +14366,37 @@ random 5
 switch
 	case 4
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbHopping_mario3.zlib", -1
 	call cellanim3wait
 	break
 	case 4
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbHopping_bramble.zlib", -1
 	call cellanim3wait
 	break
 	case 3
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbHopping_tapA.zlib", -1
 	call cellanim3wait
 	break 
 	case 2
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbHopping_remix5.zlib", -1
 	call cellanim3wait
 	break
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbHopping_v0.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/agbHopping_v1.zlib", -1
 	call cellanim3wait
 	break
@@ -14165,31 +14425,37 @@ random 6
 switch 
 	case 5
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrNinja_magma.zlib", -1
 	call cellanim3wait
 	break
 	case 4
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrNinja_remix3.zlib", -1
 	call cellanim3wait
 	break
 	case 3
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrNinja_songbird.zlib", -1
 	call cellanim3wait
 	break
 	case 2
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrNinja_remix8.zlib", -1
 	call cellanim3wait
 	break
 	case 1
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrNinja_long.zlib", -1
 	call cellanim3wait
 	break
 	case 0
 	remove_cellanim 3
+	call cellanim3wait
 	set_cellanim 3, u"rom:/cellanim/ntrNinja_remixLED.zlib", -1
 	call cellanim3wait
 	break
@@ -14228,55 +14494,68 @@ random 6
 switch 
 	case 5
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/ntrRobot_r7ds.zlib", -1
 	call cellanim5wait
 	remove_layout 7
+	call layout7wait
 	set_layout 7, u"rom:/layout/ntrRobot_long.zlib", -1
 	call layout7wait
 	break
 	case 4
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/ntrRobot_wario.zlib", -1
 	call cellanim5wait
 	remove_layout 7
+	call layout7wait
 	set_layout 7, u"rom:/layout/ntrRobot_wario.zlib", -1
 	call layout7wait
 	break
 	case 3
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/ntrRobot_remix00.zlib", -1
 	call cellanim5wait
 	remove_layout 7
+	call layout7wait
 	set_layout 7, u"rom:/layout/ntrRobot_long.zlib", -1
 	call layout7wait
 	break
 	case 2
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/ntrRobot_short.zlib", -1
 	call cellanim5wait
 	remove_layout 7
+	call layout7wait
 	set_layout 7, u"rom:/layout/ntrRobot_short.zlib", -1
 	call layout7wait
 	break
 	case 1
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/ntrRobot_long.zlib", -1
 	call cellanim5wait
 	remove_layout 7
+	call layout7wait
 	set_layout 7, u"rom:/layout/ntrRobot_long.zlib", -1
 	call layout7wait
 	break
 	case 0
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/ntrRobot_arrange.zlib", -1
 	call cellanim5wait
 	remove_layout 7
+	call layout7wait
 	set_layout 7, u"rom:/layout/ntrRobot_long.zlib", -1
 	call layout7wait
 	break
 endswitch
 
 remove_effect 5
+call effect5wait
 set_effect 5, u"rom:/effect/ntrRobot.zlib", -1
 call effect5wait
 
@@ -14296,16 +14575,19 @@ random 3
 switch 
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBlanco_remix03.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBlanco_long.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBlanco_arrange.zlib", -1
 	call cellanim4wait
 	break
@@ -14316,6 +14598,7 @@ set_layout 6, u"rom:/layout/ntrRobot_long.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/ctrBlanco.zlib", -1
 call effect4wait
 
@@ -14334,11 +14617,13 @@ random 2
 switch 
 	case 1
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlSeesaw_v0.zlib", -1
 	call cellanim5wait
 	break
 	case 0
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlSeesaw_remix1.zlib", -1
 	call cellanim5wait
 	break
@@ -14348,7 +14633,7 @@ call layout7wait
 set_layout 7, u"rom:/layout/ntrRobot_long.zlib", -1
 call layout7wait
 
-remove_effect 5
+call effect5wait
 set_effect 5, u"rom:/effect/ntrRobot.zlib", -1
 call effect5wait
 
@@ -14366,11 +14651,13 @@ random 3
 switch
 	case 2
 		remove_cellanim 5
+		call cellanim5wait
 		set_cellanim 5, u"rom:/cellanim/ntrShortLive_remix9.zlib", -1
 		call cellanim5wait
 	break
 	case 1
 		remove_cellanim 5
+		call cellanim5wait
 		set_cellanim 5, u"rom:/cellanim/ntrShortLive_remix5.zlib", -1
 		call cellanim5wait
 	break
@@ -14400,6 +14687,7 @@ stop
 
 loadsomen:
 remove_cellanim 4
+call cellanim4wait
 set_cellanim 4, u"rom:/cellanim/ntrSomen_long.zlib", -1
 call cellanim4wait
 	
@@ -14430,16 +14718,19 @@ random 3
 switch 
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbQuiz_remix5.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbQuiz_v0.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbQuiz_v0_jpn.zlib", -1
 	call cellanim4wait
 	break
@@ -14450,6 +14741,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/agbQuiz.zlib", -1
 call effect4wait
 
@@ -14468,11 +14760,13 @@ random 2
 switch 
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlWatch_v0.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlWatch_remix02.zlib", -1
 	call cellanim4wait
 	break
@@ -14483,6 +14777,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlWatch.zlib", -1
 call effect4wait
 
@@ -14501,16 +14796,19 @@ random 3
 switch 
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrCameraMan_remix3.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrCameraMan_wario.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrCameraMan_long.zlib", -1
 	call cellanim4wait
 	break
@@ -14521,6 +14819,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -14539,21 +14838,25 @@ random 4
 switch 
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_magma.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_mario3.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_v0.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_remix06.zlib", -1
 	call cellanim4wait
 	break
@@ -14581,21 +14884,25 @@ random 4
 switch 
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_magma.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_mario3.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_v0.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/rvlReceive_remix06.zlib", -1
 	call cellanim4wait
 	break
@@ -14623,18 +14930,21 @@ random 3
 switch 
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrInterpreter_short.zlib", -1
 	call cellanim4wait
 	goto 352
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrInterpreter_long.zlib", -1
 	call cellanim4wait
 	goto 38
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrInterpreter_remix02.zlib", -1
 	call cellanim4wait
 	goto 298
@@ -14643,10 +14953,12 @@ endswitch
 
 label 38
 remove_layout 6
+call layout6wait
 set_layout 6, u"rom:/layout/ctrInterpreter.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/ctrInterpreter.zlib", -1
 call effect4wait
 
@@ -14663,10 +14975,12 @@ goto 907
 
 label 352
 remove_layout 6
+call layout6wait
 set_layout 6, u"rom:/layout/ctrInterpreter.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/ctrInterpreter.zlib", -1
 call effect4wait
 
@@ -14683,10 +14997,12 @@ goto 907
 
 label 298
 remove_layout 6
+call layout6wait
 set_layout 6, u"rom:/layout/ctrInterpreter.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/ctrInterpreter.zlib", -1
 call effect4wait
 
@@ -14708,26 +15024,31 @@ random 5
 switch 
 	case 4
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBackbeat_red.zlib", -1
 	call cellanim4wait
 	break
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBackbeat_remix6.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBackbeat_v0.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBackbeat_v1.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBackbeat_v2.zlib", -1
 	call cellanim4wait
 	break
@@ -14766,6 +15087,7 @@ remove_model 0
 		set_model 4, u"rom:/__test/DefaultFragmentLight.bcenv", 1
 
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrTango_long.zlib", -1
 		call cellanim4wait
 
@@ -14774,6 +15096,7 @@ remove_model 0
 		call layout6wait
 
 		remove_effect 4
+		call effect4wait
 		set_effect 4, u"rom:/effect/ctrTango.zlib", -1
 		call effect4wait
 
@@ -14828,6 +15151,7 @@ remove_model 0
 		set_model 4, u"rom:/__test/DefaultFragmentLight.bcenv", 1
 
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrTango_remix05.zlib", -1
 		call cellanim4wait
 
@@ -14836,6 +15160,7 @@ remove_model 0
 		call layout6wait
 
 		remove_effect 4
+		call effect4wait
 		set_effect 4, u"rom:/effect/ctrTango.zlib", -1
 		call effect4wait
 
@@ -14890,6 +15215,7 @@ remove_model 0
 		set_model 4, u"rom:/__test/DefaultFragmentLight.bcenv", 1
 
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrTango_long.zlib", -1
 		call cellanim4wait
 
@@ -14898,6 +15224,7 @@ remove_model 0
 		call layout6wait
 
 		remove_effect 4
+		call effect4wait
 		set_effect 4, u"rom:/effect/ctrTango.zlib", -1
 		call effect4wait
 
@@ -14952,11 +15279,13 @@ random 2
 switch 
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrTeppan_remix2.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrTeppan_long.zlib", -1
 	call cellanim4wait
 	break
@@ -14984,11 +15313,13 @@ random 2
 switch 
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBear_long.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBear_fortnite.zlib", -1
 	call cellanim4wait
 	break
@@ -14999,6 +15330,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/ctrBear.zlib", -1
 call effect4wait
 
@@ -15017,11 +15349,13 @@ random 8
 switch 
 	case 7
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_bramble.zlib", -1
 	call cellanim4wait
 	break
 	case 6
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_r1ds.zlib", -1
 	call cellanim4wait
 	break
@@ -15032,27 +15366,32 @@ switch
 	break
 	case 4
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_remix01.zlib", -1
 	call cellanim4wait
 	goto 438
 	break
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_miku.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_remix9.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_long.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrChorus_short.zlib", -1
 	call cellanim4wait
 	break
@@ -15102,30 +15441,35 @@ random 5
 switch 
 	case 4
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/VeryNormalMarchers.zlib", -1
     call cellanim4wait
     goto 0x5566
     break
     case 3
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_remix7.zlib", -1
     call cellanim4wait
     goto 0x5566
     break
     case 2
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_v1.zlib", -1
     call cellanim4wait
     goto 0x5588
     break
     case 1
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_v0.zlib", -1
     call cellanim4wait
     goto 0x5566
     break
     case 0
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_tempo.zlib", -1
     call cellanim4wait
     goto 0x5566
@@ -15173,30 +15517,35 @@ random 5
 switch 
 	case 4
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/VeryNormalMarchers.zlib", -1
     call cellanim4wait
     goto 0x5566
     break
     case 3
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_remix7P.zlib", -1
     call cellanim4wait
     goto 0x5566
     break
     case 2
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_v1P.zlib", -1
     call cellanim4wait
     goto 0x5588
     break
     case 1
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_v0P.zlib", -1
     call cellanim4wait
     goto 0x5566
     break
     case 0
     remove_cellanim 4
+	call cellanim4wait
     set_cellanim 4, u"rom:/cellanim/agbMarcher_tempoP.zlib", -1
     call cellanim4wait
     goto 0x5566
@@ -15244,26 +15593,31 @@ random 4
 switch
 	case 3
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBlueBirds_remix09.zlib", -1
 	call cellanim4wait
 	break
 	case 2
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBlueBirds_rmx2.zlib", -1
 	call cellanim4wait
 	break
 	case 1
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBlueBirds_2.zlib", -1
 	call cellanim4wait
 	break
 	case 0
 	remove_cellanim 4
+	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ntrBlueBirds_v0.zlib", -1
 	call cellanim4wait
 	break 
 endswitch
-remove_layout 6
+
+call layout6wait
 set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
@@ -15285,26 +15639,31 @@ loadairbat:
 random 4
 switch
 	case 3
+	remove_cellanim 4
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbBatter_blue.zlib", -1
 	call cellanim4wait
 	break
 	case 2
+	remove_cellanim 4
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbBatter_tempo.zlib", -1
 	call cellanim4wait
 	break
 	case 1
+	remove_cellanim 4
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbBatter_long.zlib", -1
 	call cellanim4wait
 	break
 	case 0
+	remove_cellanim 4
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/agbBatter_remixLED.zlib", -1
 	call cellanim4wait
 	break
 endswitch
+
 call layout6wait
 set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
@@ -15327,28 +15686,25 @@ random 2
 switch
 	case 0
 		remove_cellanim 4
-		set_cellanim 4, u"rom:/cellanim/agbVirus_magma.zlib", -1
 		call cellanim4wait
-	break
-	case 1
-		remove_cellanim 4
 		set_cellanim 4, u"rom:/cellanim/agbVirus_v0.zlib", -1
 		call cellanim4wait
 	break
+	default
+		remove_cellanim 4
+		call cellanim4wait
+		set_cellanim 4, u"rom:/cellanim/agbVirus_magma.zlib", -1
+		call cellanim4wait
+	break
 endswitch
+
 call layout6wait
 set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
+call layout1Ebusy
 set_layout 0x1E, u"rom:/layout/gate.zlib", -1
-label 0x4477
-layout_busy 0x1E
-if 0
-	goto 0x559
-endif 
-rest 1	// 0.020833334 beats
-goto 0x4477
-label 0x559
+call layout1Ebusy
 
 call effect4wait
 set_effect 4, u"rom:/effect/ctrDotSamurai.zlib", -1
@@ -15363,19 +15719,10 @@ rest 0xC0	// 4.0 beats
 
 rest 0xC	// 0.25 beats
 game_cellanim 0x40, 4
-0x2B 0x40, 0
+0x2B 0x40, 0x10
 stop
 
-loadcoin:
-remove_cellanim 4
-set_cellanim 4, u"rom:/cellanim/ntrCoinToss_remixTED.zlib", -1
-call cellanim4wait
-
-call layout6wait
-set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
-call layout6wait
-
-set_layout 0x1E, u"rom:/layout/gate.zlib", -1
+layout1Ebusy:
 label 0x4477
 layout_busy 0x1E
 if 0
@@ -15384,6 +15731,22 @@ endif
 rest 1	// 0.020833334 beats
 goto 0x4477
 label 0x559
+return
+
+loadcoin:
+
+remove_cellanim 4
+call cellanim4wait
+set_cellanim 4, u"rom:/cellanim/ntrCoinToss_remixTED.zlib", -1
+call cellanim4wait
+
+call layout6wait
+set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
+call layout6wait
+
+call layout1Ebusy
+set_layout 0x1E, u"rom:/layout/gate.zlib", -1
+call layout1Ebusy
 
 call effect4wait
 set_effect 4, u"rom:/effect/ctrDotSamurai.zlib", -1
@@ -15401,18 +15764,9 @@ game_cellanim 0x41, 4
 0x2B 0x41, 0x10
 stop
 
-set_layout 0x1E, u"rom:/layout/gate.zlib", -1
-label 0x4477
-layout_busy 0x1E
-if 0
-	goto 0x559
-endif 
-rest 1	// 0.020833334 beats
-goto 0x4477
-label 0x559
-
 loadsword:
 remove_cellanim 4
+call cellanim4wait
 set_cellanim 4, u"rom:/cellanim/rvlSword_v0.zlib", -1
 call cellanim4wait
 
@@ -15420,15 +15774,9 @@ call layout6wait
 set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
+call layout1Ebusy
 set_layout 0x1E, u"rom:/layout/gate.zlib", -1
-label 0x4477
-layout_busy 0x1E
-if 0
-	goto 0x559
-endif 
-rest 1	// 0.020833334 beats
-goto 0x4477
-label 0x559
+call layout1Ebusy
 
 call effect4wait
 set_effect 4, u"rom:/effect/ctrDotSamurai.zlib", -1
@@ -15443,11 +15791,12 @@ rest 0xC0	// 4.0 beats
 
 rest 0xC	// 0.25 beats
 game_cellanim 0x42, 4
-0x2B 0x42, 0
+0x2B 0x42, 0x10
 stop
 
 loaddrum:
 remove_cellanim 4
+call cellanim4wait
 set_cellanim 4, u"rom:/cellanim/agbMetro.zlib", -1
 call cellanim4wait
 
@@ -15456,6 +15805,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/rvlKarate.zlib", -1
 call effect4wait
 
@@ -15468,7 +15818,7 @@ rest 0xC0	// 4.0 beats
 rest 0xC	// 0.25 beats
 game_cellanim 0x3C, 4
 game_effect 0x3C, 4
-0x2B 0x3C, 3
+0x2B 0x3C, 5
 stop
 
 loadsss:
@@ -15476,21 +15826,25 @@ random 4
 switch
 	case 3
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrDotSamurai_wario.zlib", -1
 		call cellanim4wait
 	break
 	case 2
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrDotSamurai_arrange_low.zlib", -1
 		call cellanim4wait
 	break
 	case 1
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrDotSamurai_arrange.zlib", -1
 		call cellanim4wait
 	break
 	case 0
 		remove_cellanim 4
+		call cellanim4wait
 		set_cellanim 4, u"rom:/cellanim/ctrDotSamurai_arrange_kor.zlib", -1
 		call cellanim4wait
 	break
@@ -15500,6 +15854,7 @@ set_layout 6, u"rom:/layout/ntrBlueBirds.zlib", -1
 call layout6wait
 
 remove_effect 4
+call effect4wait
 set_effect 4, u"rom:/effect/ctrDotSamurai.zlib", -1
 call effect4wait
 
@@ -15524,31 +15879,37 @@ random 6
 switch
 	case 5
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlFork_remix9.zlib", -1
 	call cellanim5wait
 	break
 	case 4
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlFork_fortnite.zlib", -1
 	call cellanim5wait
 	break
 	case 3
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlFork_repainted.zlib", -1
 	call cellanim5wait
 	break
 	case 2
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlFork_remix09.zlib", -1
 	call cellanim5wait
 	break
 	case 1
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlFork_v2.zlib", -1
 	call cellanim5wait
 	break
 	case 0
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlFork_v0.zlib", -1
 	call cellanim5wait
 	break
@@ -15572,15 +15933,23 @@ game_cellanim 0x24, 5
 stop 
 
 loadbird:
-random 2
+random 3
 switch
+	case 2
+	remove_cellanim 5
+	call cellanim5wait
+	set_cellanim 5, u"rom:/cellanim/rvlBird_remix09.zlib", -1
+	call cellanim5wait
+	break
 	case 1
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlBird_v0.zlib", -1
 	call cellanim5wait
 	break
 	case 0
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlBird_remix05.zlib", -1
 	call cellanim5wait
 	break
@@ -15661,31 +16030,37 @@ random 6
 switch
 	case 5
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlInterview_wario.zlib", -1
 	call cellanim5wait
 	break
 	case 4
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlInterview_remix07.zlib", -1
 	call cellanim5wait
 	break
 	case 3
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlInterview_remix04.zlib", -1
 	call cellanim5wait
 	break
 	case 2
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlInterview_remix09.zlib", -1
 	call cellanim5wait
 	break
 	case 1
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlInterview_long.zlib", -1
 	call cellanim5wait
 	break
 	case 0
 	remove_cellanim 5
+	call cellanim5wait
 	set_cellanim 5, u"rom:/cellanim/rvlInterview_remix05.zlib", -1
 	call cellanim5wait
 	break
