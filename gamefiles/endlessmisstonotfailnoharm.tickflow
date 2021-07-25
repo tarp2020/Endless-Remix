@@ -139,13 +139,8 @@ sub 4
 0xA7<2>
 if 1
 	goto 0x7272
-<<<<<<< Updated upstream
-endif 
-rest 0xC	// 0.25 beats
-=======
 endif
 rest 0xC 
->>>>>>> Stashed changes
 async_sub 0x24
 rest 0x18	// 0.5 beats
 // See this for information about game sequences: https://pastebin.com/SyhaZJRt
@@ -208,60 +203,6 @@ sub 4
 async_call sumo1
 
 rest 0x18	// 0.5 beats
-random 5
-switch
-	case 0
-		call choosegameslot2
-	break
-	case 1
-		call choosegameslot1
-	break
-	case 2
-		call choosegameslot1idlealt
-	break
-	case 3
-		call choosegameslot2idlealt
-	break
-	case 4
-		call choosegameslot4
-	break
-	case 5
-		call choosegameslot4alt
-	break
-endswitch
-call didigameover
-call choosegameendless
-call didigameover
-call choosegameslot4
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot1alt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot2
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot1
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot2idlealt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot3
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot4alt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot3idlealt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot1
-call didigameover
-label 0x6969
-0x53 0x100020A
-0x23 0x100020A
-0x55 1
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
 call choosegameendless
@@ -1001,7 +942,7 @@ choosegameendless:
 0x65<2>
 call clearslot3
 rest 2
-random 4
+random 3
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
@@ -1035,7 +976,6 @@ switch
 		async_call virus
 		rest 0x10	// 0.5 beats
 	break
-	case 2
 		rest 0x5E	// 2.0 beats
 		async_call loadsword
 		rest 0x60	// 2.0 beats
@@ -1052,8 +992,7 @@ switch
 		0x29<2> 
 		async_call sword
 		rest 0x10	// 0.5 beats
-	break
-	case 3
+	case 2
 		rest 0x5E	// 2.0 beats
 		async_call loaddrum
 		rest 0x60	// 2.0 beats
@@ -2291,7 +2230,7 @@ choosegameslot4:
 0x65<2>
 call clearslot4
 rest 2
-random 4
+random 3
 switch
 	case 2
 		rest 0x5E	// 2.0 beats
@@ -2327,7 +2266,7 @@ switch
 		async_call fill
 		rest 0x10	// 0.5 beats
 	break
-	case 0
+	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "rvl_bird_L_title"
 		async_call disabletext
@@ -2344,7 +2283,6 @@ switch
 		async_call bird
 		rest 0x10	// 0.5 beats
 	break
-	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "rvl_interview_L_title"
 		async_call disabletext
@@ -2365,8 +2303,6 @@ switch
 		0x29<2> 
 		async_call wrestle
 		rest 0x10	// 0.5 beats
-	break
-	
 endswitch
 return
 

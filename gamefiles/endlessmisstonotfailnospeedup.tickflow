@@ -140,6 +140,7 @@ sub 4
 if 1
 	goto 0x7272
 endif 
+rest 0xC 
 async_sub 0x24
 rest 0x18	// 0.5 beats
 // See this for information about game sequences: https://pastebin.com/SyhaZJRt
@@ -232,7 +233,7 @@ call choosegameslot1alt
 call didigameover
 call choosegameslot2
 call didigameover
-call choosegameslot3alt
+call choosegameslot1
 call didigameover
 call choosegameslot2idlealt
 call didigameover
@@ -269,13 +270,13 @@ async_call playernovisuals
 call choosegameslot2
 call didigameover
 async_call playernovisuals
-call choosegameslot1idlealt
+call choosegameslot4alt
 call didigameover
 async_call playernovisuals
 call choosegameslot3
 call didigameover
 async_call playernovisuals
-call choosegameslot4alt
+call choosegameslot1idlealt
 call didigameover
 async_call playernovisuals
 call choosegameslot2alt
@@ -287,7 +288,7 @@ async_call playernovisuals
 call choosegameslot4
 call didigameover
 async_call playernovisuals
-call choosegameslot3alt
+call choosegameslot3
 call didigameover
 async_call playernovisuals
 call choosegameslot2idlealt
@@ -306,7 +307,7 @@ async_call playernovisuals
 call choosegameslot1idlealt
 call didigameover
 async_call playernovisuals
-call choosegameslot2
+call choosegameslot2alt
 call didigameover
 async_call playernovisuals
 call choosegameslot3alt
@@ -324,7 +325,7 @@ async_call playernovisuals
 call choosegameslot4alt
 call didigameover
 async_call playernovisuals
-call choosegameslot2alt
+call choosegameslot2
 call didigameover
 async_call playernovisuals
 call choosegameslot3idlealt
@@ -333,7 +334,7 @@ async_call playernovisuals
 call choosegameslot4
 call didigameover
 async_call playernovisuals
-call choosegameslot3alt
+call choosegameslot2alt
 call didigameover
 async_call playernovisuals
 call choosegameslot1
@@ -13487,7 +13488,7 @@ set_sfx 1, u"GROUP_AGB_RAT"
 rest 0xC	// 0.25 beats
 
 game_cellanim 0x09, 2
-0x2B 0x09, 3
+0x2B 0x09, 0xD
 stop
 
 loaddazzle:

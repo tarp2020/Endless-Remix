@@ -19,7 +19,7 @@
 
 // OK, here's where everything starts. This template is based off of the Lush Remix.
 // #index determines which game slot you want to replace. See https://pastebin.com/vJzWn2vm for the list of IDs. By default, the ID is 0x5E, or Lush Remix's ID, meaning this remix will replace Lush Remix.
-#index 0x4A
+#index 0x5E
 
 start:
 
@@ -139,13 +139,8 @@ sub 4
 0xA7<2>
 if 1
 	goto 0x7272
-<<<<<<< Updated upstream
 endif 
-rest 0xC	// 0.25 beats
-=======
-endif
 rest 0xC 
->>>>>>> Stashed changes
 async_sub 0x24
 rest 0x18	// 0.5 beats
 // See this for information about game sequences: https://pastebin.com/SyhaZJRt
@@ -155,6 +150,8 @@ rest 0x18	// 0.5 beats
 0xA2
 0xA2
 0xAD 1
+0xAB<3> 1
+0xAC 0
 async_call startingGame
 0x8C 0
 rest 1	// 1 tick
@@ -163,9 +160,9 @@ rest 0x5F	// 2.0 beats
 rest 0x60	// 2.0 beats
 rest 0x60	// 2.0 beats
 rest 0x60	// 2.0 beats
+async_call goforapflicker
 0x53 0x100020A
 0x23 0x100020A
-rest 1
 0x55 1
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
@@ -178,7 +175,6 @@ sub 4
 0x29<2> 
 0x2D 0
 async_call clappytrio1
-
 rest 0x18	// 0.5 beats
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
@@ -192,8 +188,8 @@ sub 4
 0x29<2> 
 0x2D 0
 async_call shootemup1
-
 rest 0x18	// 0.5 beats
+
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
 rest 0xC0	// 4.0 beats
@@ -206,62 +202,7 @@ sub 4
 0x29<2> 
 0x2D 0
 async_call sumo1
-
 rest 0x18	// 0.5 beats
-random 5
-switch
-	case 0
-		call choosegameslot2
-	break
-	case 1
-		call choosegameslot1
-	break
-	case 2
-		call choosegameslot1idlealt
-	break
-	case 3
-		call choosegameslot2idlealt
-	break
-	case 4
-		call choosegameslot4
-	break
-	case 5
-		call choosegameslot4alt
-	break
-endswitch
-call didigameover
-call choosegameendless
-call didigameover
-call choosegameslot4
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot1alt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot2
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot1
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot2idlealt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot3
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot4alt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot3idlealt
-call didigameover
-speed_relative 0x101, 0x100, 0x200
-call choosegameslot1
-call didigameover
-label 0x6969
-0x53 0x100020A
-0x23 0x100020A
-0x55 1
 speed_relative 0x101, 0x100, 0x200
 async_call playernovisuals
 call choosegameendless
@@ -378,56 +319,13 @@ async_call playernovisuals
 call choosegameslot1
 call didigameover
 goto 0x6969
+
 // Expand your main sequence here as needed.
 
-randommusic5:
-remove_sfx 5
-rest 3
-random 6
-switch
-	case 5
-	set_sfx 5, u"GROUP_WSD_ENDLESS_LOOP"
-	break
-	case 1
-	set_sfx 5, u"GROUP_WSD_ENDLESS_SIIVA"
-	break
-	case 2
-	set_sfx 5, u"GROUP_WSD_ENDLESS_ANNACONDA"
-	break
-	case 3
-	set_sfx 5, u"GROUP_WSD_ENDLESS_BIRD"
-	break
-	case 4
-	set_sfx 5, u"GROUP_WSD_ENDLESS_REPAINTED"
-	break
-	case 0
-	set_sfx 5, u"GROUP_WSD_ENDLESS_YANKIN"
-	break
-endswitch
-stop
 
-randommusic7:
-remove_sfx 0
-rest 3
-random 5
-switch
-	case 0
-	set_sfx 0, u"GROUP_WSD_ENDLESS_STRANGERS"
-	break
-	case 1
-	set_sfx 0, u"GROUP_WSD_ENDLESS_POLYRHYTHM"
-	break
-	case 2
-	set_sfx 0, u"GROUP_WSD_ENDLESS_MEMES"
-	break
-	case 3
-	set_sfx 0, u"GROUP_WSD_ENDLESS_YANKINTWO"
-	break
-	case 4
-	set_sfx 0, u"GROUP_WSD_ENDLESS_STRANGERS"
-	break
-endswitch
-stop
+
+
+
 
 // Leave this as it is.
 label 0x7272
@@ -441,6 +339,13 @@ stop
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------
+goforapflicker:
+label 601
+0xAC<2>
+rest 0x30
+goto 601
+stop
+
 // Here is the code for random fade ins and out, 1/15 chance by default. will last 15 and 1/3 beats if I did my math right
 
 playernovisuals:
@@ -469,11 +374,11 @@ stop
 // game over code
 // holy shit it finally works - Jornker
 didigameover:
-// 0xA2<2>
-// if 1
-	// sub 0x0B
-	// stop
-// endif
+0xA2<2>
+if 1
+	sub 0x0B
+	stop
+endif
 return
 
 // Epilogue/rating assets. For now, leave it as it is unless you know what you're doing.
@@ -528,6 +433,9 @@ else
 	endif 
 endif 
 stop 
+
+
+
 
 // loadInitialGames loads in assets for the first (or only) four games that will appear in your remix.
 // The template will expect you to know which cellanim is for which game, as well as whether the games use effects/layouts.
@@ -722,7 +630,7 @@ game_layout 0x1, 7
 //game_model E, 1
 //game_model E, 2
 //game_model E, 3
-return 
+return
 
 
 
@@ -1001,7 +909,7 @@ choosegameendless:
 0x65<2>
 call clearslot3
 rest 2
-random 4
+random 3
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
@@ -1035,7 +943,6 @@ switch
 		async_call virus
 		rest 0x10	// 0.5 beats
 	break
-	case 2
 		rest 0x5E	// 2.0 beats
 		async_call loadsword
 		rest 0x60	// 2.0 beats
@@ -1052,8 +959,7 @@ switch
 		0x29<2> 
 		async_call sword
 		rest 0x10	// 0.5 beats
-	break
-	case 3
+	case 2
 		rest 0x5E	// 2.0 beats
 		async_call loaddrum
 		rest 0x60	// 2.0 beats
@@ -2291,7 +2197,7 @@ choosegameslot4:
 0x65<2>
 call clearslot4
 rest 2
-random 4
+random 3
 switch
 	case 2
 		rest 0x5E	// 2.0 beats
@@ -2327,7 +2233,7 @@ switch
 		async_call fill
 		rest 0x10	// 0.5 beats
 	break
-	case 0
+	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "rvl_bird_L_title"
 		async_call disabletext
@@ -2344,7 +2250,6 @@ switch
 		async_call bird
 		rest 0x10	// 0.5 beats
 	break
-	default
 		rest 0x5E	// 2.0 beats
 		0x65<1> 1, "rvl_interview_L_title"
 		async_call disabletext
@@ -2365,8 +2270,6 @@ switch
 		0x29<2> 
 		async_call wrestle
 		rest 0x10	// 0.5 beats
-	break
-	
 endswitch
 return
 
@@ -16091,7 +15994,7 @@ set_sfx 4, u"GROUP_WRESTLER"
 rest 0xC	// 0.25 beats
 game_cellanim 0x27, 5
 0x2B 0x27, 3
-stop 
+stop  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------
