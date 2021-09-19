@@ -2045,7 +2045,7 @@ rest 2
 random 5
 switch
 	case 4
-		rest 0xBE	// 4.0 beats
+		rest 0x5E	// 4.0 beats
 		async_call loadelephant
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -8852,13 +8852,12 @@ switch
 endswitch
 rest 0x10	// 0.333 beats
 0x103 1
-0x102 0x60
+0x102 0x30
 0x109 
 async_sub 0x28
 fade<1> 1, 1, 1
 input 1
 0x109<1> 
-rest 0x30
 0x101
 0x101<1> 0x30
 rest 0x30
