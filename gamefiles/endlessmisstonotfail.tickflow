@@ -1003,8 +1003,6 @@ switch
 		async_call loadcoin
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
-		0x65<1> 1, "gate_ntrCoinToss_title"
-		async_call disabletext
 		rest 0xC0	// 4.0 beats
 		rest 0xB0	// 3.5 beats
 		call changeEngineSynchronous
@@ -1019,8 +1017,6 @@ switch
 		async_call loadvirus
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
-		0x65<1> 1, "gate_agbVirus_title"
-		async_call disabletext
 		rest 0xC0	// 4.0 beats
 		rest 0xB0	// 3.5 beats
 		call changeEngineSynchronous
@@ -1035,8 +1031,6 @@ switch
 		async_call loadsword
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
-		0x65<1> 1, "gate_rvlSword_title"
-		async_call disabletext
 		rest 0xC0	// 4.0 beats
 		rest 0xA8	// 3.5 beats
 		play_sfx 0x10011A6
@@ -1053,8 +1047,6 @@ switch
 		async_call loaddrum
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
-		0x65<1> 1, "gate_state_clear"
-		async_call disabletext
 		rest 0xC0	// 4.0 beats
 		rest 0xA8	// 3.5 beats
 		play_sfx 0x10011A6
@@ -1077,8 +1069,6 @@ random 5
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_rat_L_title"
-		async_call disabletext	
 		async_call loadrace
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1093,8 +1083,6 @@ switch
 	break
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_rocket_L_title"
-		async_call disabletext	
 		async_call loadrocket
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1109,8 +1097,6 @@ switch
 	break
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_boxShow_L_title"
-		async_call disabletext	
 		async_call loaddazzle
 		
 		rest 0xC0	// 4.0 beats
@@ -1130,8 +1116,6 @@ switch
 	
 	case 3
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_manju_L_title"
-		async_call disabletext
 		async_call loaddough
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1149,8 +1133,6 @@ switch
 	
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_golf_L_title"
-		async_call disabletext
 		async_call loadgolf
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1167,22 +1149,21 @@ switch
 endswitch
 return 
 
-
+0x65<1> 1, "ctr_sumou_L_title"
+async_call disabletext
 
 choosegameslot1alt:
 0x65<2>
 call clearslot1
 rest 2
-random 5
+random 6
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ctr_sumou_L_title"
-		async_call disabletext
 		async_call loadsumo
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
-		
+	
 		rest 0xC0	// 4.0 beats
 		rest 0xA8	// 3.5 beats
 		play_sfx 0x10011A6
@@ -1194,11 +1175,8 @@ switch
 		async_call sumo
 		rest 0x10	// 0.5 beats
 	break
-	
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_muscle_S_title"
-		async_call disabletext
 		async_call loadpunch
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1213,9 +1191,25 @@ switch
 		rest 0x10	// 0.5 beats
 	break
 	case 2
+		random 2
+		switch
+		case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_shugyo_L_title"
-		async_call disabletext
+		async_call loadmuncharrange
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 0x1B
+		sub 4
+		0x29<2> 
+		async_call muncharrange
+		rest 0x10	// 0.5 beats
+		break
+		case 1
+		rest 0x5E	// 2.0 beats
 		async_call loadmunch
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1228,11 +1222,11 @@ switch
 		0x29<2> 
 		async_call munch
 		rest 0x10	// 0.5 beats
+		break
+		endswitch
 	break
 	case 3
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_fishing_L_title"
-		async_call disabletext
 		async_call loadfish
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1246,10 +1240,23 @@ switch
 		async_call fish
 		rest 0x10	// 0.5 beats
 	break
+	case 4
+		rest 0x5E	// 2.0 beats
+		async_call loadboard
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0xB0	// 3.5 beats
+		call changeEngineSynchronous
+		engine 0x2F
+		sub 4
+		0x29<2> 
+		async_call board
+		rest 0x10	// 0.5 beats
+	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_samurai_L_title"
-		async_call disabletext
 		async_call loadsamuri
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1274,8 +1281,6 @@ random 6
 switch
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_sort_L_title"
-		async_call disabletext
 		async_call loadpest
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1298,8 +1303,6 @@ switch
 	break
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_batting_L_title"
-		async_call disabletext
 		async_call loadexhibition
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1315,8 +1318,6 @@ switch
 	break
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_hair_S_title"
-		async_call disabletext
 		async_call loadtweezer
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1332,8 +1333,6 @@ switch
 	break
 	case 3
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_assemble_L_title"
-		async_call disabletext	
 		async_call loadbtsnds
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1351,8 +1350,6 @@ switch
 		switch
 			case 0
 			rest 0x5E	// 2.0 beats
-			0x65<1> 1, "rvl_muscle_L_title"
-			async_call disabletext	
 			async_call loadbtswii
 			rest 0x60	// 2.0 beats
 			rest 0xC0	// 4.0 beats
@@ -1367,8 +1364,6 @@ switch
 			break
 			case 1
 			rest 0x5E	// 2.0 beats
-			0x65<1> 1, "rvl_muscle_A_title"
-			async_call disabletext	
 			async_call loadbtswii
 			rest 0x60	// 2.0 beats
 			rest 0xC0	// 4.0 beats
@@ -1385,8 +1380,6 @@ switch
 	break
 	case 5
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_tap_A_title"
-		async_call disabletext
 		async_call loadtaptroupe
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1410,8 +1403,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_tap_L_title"
-		async_call disabletext
 		async_call loadtap
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1436,8 +1427,6 @@ random 6
 switch
 	case 4
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_shuji_L_title"
-		async_call disabletext
 		async_call loadpower
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1456,8 +1445,6 @@ switch
 		switch
 			case 3
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_robot_L_title"
-				async_call disabletext
 				async_call loadscrewbot1
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1473,8 +1460,6 @@ switch
 			break
 			default
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_robot_L_title"
-				async_call disabletext
 				async_call loadscrewbot
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1492,8 +1477,6 @@ switch
 	break
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_book_L_title"
-		async_call disabletext
 		async_call loadbooks
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1512,8 +1495,6 @@ switch
 		switch
 			default
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_rap_L_title"
-				async_call disabletext
 				async_call loadrap
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1529,8 +1510,6 @@ switch
 			break
 			case 1
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_rap_L_title"
-				async_call disabletext
 				async_call loadrap6
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1549,8 +1528,6 @@ switch
 	
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_ghost_S_title"
-		async_call disabletext
 		async_call loadspook
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1566,8 +1543,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_chorus_L_title"
-		async_call disabletext
 		async_call loadrocker
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1593,8 +1568,6 @@ switch
 	
 	case 4
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_pingpong_A_title"
-		async_call disabletext
 		async_call loadtambourine
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1613,8 +1586,6 @@ switch
 		switch
 			case 0
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "agb_clap_A_title"
-				async_call disabletext
 				async_call loadclapremix
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1630,8 +1601,6 @@ switch
 			break
 			case 1
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "agb_clap_A_title"
-				async_call disabletext
 				async_call loadclaparrange
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1647,8 +1616,6 @@ switch
 			break
 			case 2
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "agb_clap_S_title"
-				async_call disabletext
 				async_call loadclapshort
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1664,8 +1631,6 @@ switch
 			break
 			default
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "agb_clap_L_title"
-				async_call disabletext
 				async_call loadclaplong
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1683,8 +1648,6 @@ switch
 	break
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_badminton_S_title"
-		async_call disabletext
 		async_call loadbadminton
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1709,8 +1672,6 @@ switch
 	break
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_hopping_L_title"
-		async_call disabletext
 		async_call loadbounce
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1726,8 +1687,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_idol_L_title"
-		async_call disabletext
 		async_call loadfan
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1752,8 +1711,6 @@ random 5
 switch
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ctr_fruitbasket_S_title"
-		async_call disabletext
 		async_call loadcourt
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1770,8 +1727,6 @@ switch
 	
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_shooting_S_title"
-		async_call disabletext
 		async_call loadshoot
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1787,8 +1742,6 @@ switch
 	break
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_nightWalk_L_title"
-		async_call disabletext
 		async_call loadnight
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1804,8 +1757,6 @@ switch
 	break
 	case 3
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ctr_step_S_title"
-		async_call disabletext
 		async_call loadstep
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1821,8 +1772,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_ninja_L_title"
-		async_call disabletext
 		async_call loaddog
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -1846,8 +1795,6 @@ random 6
 switch
 	case 4
 	    rest 0x5E    // 2.0 beats
-	    0x65<1> 1, "agb_rabbit_L_title"
-	    async_call disabletext
 	    async_call loadrabbit
 	    rest 0x60    // 2.0 beats
 	    rest 0xC0    // 4.0 beats
@@ -1864,8 +1811,6 @@ switch
     break
 	case 3
 	    rest 0x5E    // 2.0 beats
-	    0x65<1> 1, "ctr_tango_L_title"
-	    async_call disabletext
 	    async_call loadtango
 	    rest 0x60    // 2.0 beats
 	    rest 0xC0    // 4.0 beats
@@ -1882,8 +1827,6 @@ switch
     break
     case 2
         rest 0x5E    // 2.0 beats
-        0x65<1> 1, "ctr_bear_L_title"
-        async_call disabletext
         async_call loadbluebear
         rest 0x60    // 2.0 beats
         rest 0xC0    // 4.0 beats
@@ -1904,8 +1847,6 @@ switch
 		switch 
 			case 0
 				rest 0xBE    // 4.0 beats
-		        0x65<1> 1, "agb_marcher_L_title"
-		        async_call disabletext
 		        async_call loadmarch
 		        rest 0xC0    // 4.0 beats
 		        
@@ -1923,8 +1864,6 @@ switch
 		    break
 		    case 1
 		    	rest 0xBE    // 4.0 beats
-		        0x65<1> 1, "agb_marcher_L_title"
-		        async_call disabletext
 		        async_call loadpointmarch
 		        rest 0xC0    // 4.0 beats
 		        
@@ -1946,8 +1885,6 @@ switch
 		switch
 			case 0
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratekick
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1963,8 +1900,6 @@ switch
 			break
 			case 1
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratecombo
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1980,8 +1915,6 @@ switch
 			break
 			case 2
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratesenior
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -1997,8 +1930,6 @@ switch
 			break
 			case 3
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratereturns
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -2014,8 +1945,6 @@ switch
 			break
 			case 4
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratekick
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -2031,8 +1960,6 @@ switch
 			break
 			case 5
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratecombo
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -2048,8 +1975,6 @@ switch
 			break
 			case 6
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratesenior
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -2065,8 +1990,6 @@ switch
 			break
 			case 7
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratereturns
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -2082,8 +2005,6 @@ switch
 			break
 			case 8
 				rest 0x5E	// 2.0 beats
-				0x65<1> 1, "rvl_karate_00_title"
-				async_call disabletext
 				async_call loadkaratereturns8
 				rest 0x60	// 2.0 beats
 				rest 0xC0	// 4.0 beats
@@ -2101,8 +2022,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_batter_L_title"
-		async_call disabletext
 		async_call loadairbat
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2125,11 +2044,30 @@ call clearslot3
 rest 2
 random 5
 switch
-	
+	case 4
+		rest 0xBE	// 4.0 beats
+		async_call loadelephant
+		rest 0x60	// 2.0 beats
+		rest 0xC0	// 4.0 beats
+		
+		rest 0xC0	// 4.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x18	// 0.5 beats
+		async_call startbleep
+		rest 0x18	// 0.5 beats
+		rest 0x18	// 0.5 beats
+		
+		rest 0x18	// 0.5 beats
+		rest 0x20	// 0.667 beats
+		call changeEngineSynchronous
+		engine 0x35
+		sub 4
+		0x29<2> 
+		async_call elephant
+		rest 0x10	// 0.5 beats
+	break
 	case 3
 		rest 0xBE	// 4.0 beats
-		0x65<1> 1, "ntr_cameraMan_L_title"
-		async_call disabletext
 		async_call loadfreeze
 		rest 0xC0	// 4.0 beats
 		
@@ -2145,8 +2083,6 @@ switch
 	break
 	case 2
 		rest 0xBE	// 4.0 beats
-		0x65<1> 1, "ctr_interpreter_S_title"
-		async_call disabletext
 		async_call loadalien
 		rest 0xC0	// 4.0 beats
 		
@@ -2162,8 +2098,6 @@ switch
 	break
 	case 1
 		rest 0xBE	// 4.0 beats
-		0x65<1> 1, "ntr_chorus_S_title"
-		async_call disabletext
 		async_call loadglee
 		rest 0xC0	// 4.0 beats
 		
@@ -2179,8 +2113,6 @@ switch
 	break
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "remix_LED_title"
-		async_call disabletext
 		async_call loadsomen
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2201,8 +2133,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_watch_L_title"
-		async_call disabletext
 		async_call loadmonkeywatch
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2234,8 +2164,6 @@ random 6
 switch
 	case 4
 		rest 0xBE	// 4.0 beats
-		0x65<1> 1, "ctr_dotSamurai_L_title"
-		async_call disabletext
 		async_call loadsss
 		rest 0xC0	// 4.0 beats
 		
@@ -2251,8 +2179,6 @@ switch
 	break
 	case 3
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_receive_L_title"
-		async_call disabletext
 		async_call loadbossa
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2277,8 +2203,6 @@ switch
 	break
 	case 2
         rest 0x5E    // 2.0 beats
-        0x65<1> 1, "ctr_teppan_L_title"
-        async_call disabletext
         async_call loadcats
         rest 0x60    // 2.0 beats
         rest 0xC0    // 4.0 beats
@@ -2296,8 +2220,6 @@ switch
     break
 	case 1
 		rest 0xBE	// 4.0 beats
-		0x65<1> 1, "ntr_blueBirds_L_title"
-		async_call disabletext
 		async_call loadspace
 		rest 0xC0	// 4.0 beats
 		
@@ -2313,8 +2235,6 @@ switch
 	break
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_backbeat_L_title"
-		async_call disabletext
 		async_call loadlockstep
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2330,8 +2250,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_quiz_L_title"
-		async_call disabletext
 		async_call loadquiz
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2356,8 +2274,6 @@ random 4
 switch
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "agb_tono_L_title"
-		async_call disabletext
 		async_call loadtono
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2373,8 +2289,6 @@ switch
 	break
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_robot_S_title"
-		async_call disabletext
 		async_call loadfill
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2390,8 +2304,6 @@ switch
 	break
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_bird_L_title"
-		async_call disabletext
 		async_call loadbird
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2407,8 +2319,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_interview_L_title"
-		async_call disabletext
 		async_call loadwrestle
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2439,8 +2349,6 @@ random 5
 switch
 	case 3
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_date_L_title"
-		async_call disabletext
 		async_call loaddate
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2456,8 +2364,6 @@ switch
 	break
 	case 2
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_fork_L_title"
-		async_call disabletext
 		async_call loadfork
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2473,8 +2379,6 @@ switch
 	break
 	case 1
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_pingpong_S_title"
-		async_call disabletext
 		async_call loadrally
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2490,8 +2394,6 @@ switch
 	break
 	case 0
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "ntr_shortLive_L_title"
-		async_call disabletext
 		async_call loadbrf
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2507,8 +2409,6 @@ switch
 	break
 	default
 		rest 0x5E	// 2.0 beats
-		0x65<1> 1, "rvl_seesaw_L_title"
-		async_call disabletext
 		async_call loadcircus
 		rest 0x60	// 2.0 beats
 		rest 0xC0	// 4.0 beats
@@ -2817,7 +2717,7 @@ switch
 		fade<1> 1, 1, 1
 		input 1
 		sub 0x62
-		rest 0xC
+		unrest 0x24
 		sub 0x63
 	break
 endswitch
@@ -7263,8 +7163,18 @@ stop
 munchbeat:
 label 657
 0x101
+0x108<1> 0, 0, 0, 0, 1
+0x108<2> 
 rest 0x30
 goto 657
+stop
+
+elebeat:
+label 669
+0x108<1> 0, 0, 0, 0, 1
+0x108<2> 
+rest 0x30
+goto 669
 stop
 
 ball1:
@@ -7325,6 +7235,103 @@ rest 0x8
 fade<1> 1, 1, 1
 input 1
 async_call munchbeat
+random 3
+switch
+	case 0
+		play_sfx 0x1000C2E
+		rest 0x15	// 0.4375 beats
+		0x8E 0
+		0x100 0
+		0x102 0
+		0x103 0
+		rest 0x18	// 0.5 beats
+		0x103<1> 
+		rest 0x18
+		async_sub 0x56
+		rest 0x60
+		async_sub 0x58
+		rest 0xC0
+		async_sub 0x56
+		rest 0x48
+		async_sub 0x57
+		rest 0x60
+		async_sub 0x58
+	break
+	case 1
+		play_sfx 0x1000C30
+		rest 0x14	// 0.41666666 beats
+		0x8E 2
+		0x100 0
+		0x102 2
+		0x103 2
+		rest 0x18	// 0.5 beats
+		0x103<1> 
+		rest 0x18	// 0.5 beats
+		rest 0x18	// 0.5 beats
+		0x8E 2
+		0x100 2
+		0x102 2
+		0x103 2
+		rest 0xC	// 0.25 beats
+		0x103<1> 
+		rest 0xC	// 0.25 beats
+		rest 0x18	// 0.5 beats
+		0x8E 2
+		0x100 2
+		0x102 2
+		0x103 2
+		rest 0xC	// 0.25 beats
+		0x103<1> 
+		rest 0xC	// 0.25 beats
+		async_sub 0x58
+		rest 0xA8
+		async_sub 0x57
+		rest 0x60
+		async_sub 0x56
+		rest 0x60
+		async_sub 0x57
+		rest 0x60
+		async_sub 0x56
+	break
+	case 2
+		rest 3	// 0.0625 beats
+		play_sfx 0x1000C2F
+		rest 0x2D	// 0.9375 beats
+		0x8E 1
+		0x100 0
+		0x100 1
+		0x102 1
+		0x103 1
+		rest 0xC	// 0.25 beats
+		0x103<1> 
+		0x102 1
+		rest 0xC
+		rest 0x18
+		async_sub 0x56
+		rest 0x60
+		async_sub 0x57
+		rest 0x60
+		async_sub 0x56
+		rest 0x60
+		async_sub 0x58
+		rest 0xC0
+		async_sub 0x56
+		rest 0x60
+		async_sub 0x56
+	break
+endswitch
+stop
+
+muncharrange:
+0x107 0, 0
+0x106<1>
+0x104<1>
+rest 0x8
+rest 0x8
+fade<1> 1, 1, 1
+input 1
+async_call munchbeat
+async_call elebeat
 random 3
 switch
 	case 0
@@ -8556,6 +8563,148 @@ rest 0x24	// 0.75 beats
 rest 0x30	// 1.0 beats
 stop
 
+boardbeat:
+label 710
+0x105
+rest 0x30
+goto 710
+stop
+
+onetwothree:
+play_sfx 0x1000455
+0x105<1> 1
+rest 0x30	// 1.0 beats
+0x105<1> 1
+rest 0x30	// 1.0 beats
+stop 
+onetwothreealt:
+play_sfx 0x1000456
+0x105<1> 1
+rest 0x30	// 1.0 beats
+0x105<1> 1
+rest 0x30	// 1.0 beats
+stop 
+spin1beat:
+0x101<2> 0
+rest 0x30	// 1.0 beats
+0x101<2> 1
+rest 0x30	// 1.0 beats
+0x101<2> 2
+rest 0x30	// 1.0 beats
+0x101<2> 3
+rest 0x30	// 1.0 beats
+stop 
+spintogether:
+0x102<2> 
+rest 0x30	// 1.0 beats
+stop 
+stop2beat:
+0x100 0x120, 0
+0x101<3> 0
+rest 0x60	// 2.0 beats
+0x101<3> 1
+rest 0x60	// 2.0 beats
+0x101<3> 2
+rest 0x60	// 2.0 beats
+0x101<3> 3
+rest 0x60	// 2.0 beats
+stop 
+stop1beat:
+0x100 0x90, 0
+0x101<3> 0
+rest 0x30	// 1.0 beats
+0x101<3> 1
+rest 0x30	// 1.0 beats
+0x101<3> 2
+rest 0x30	// 1.0 beats
+0x101<3> 3
+rest 0x30	// 1.0 beats
+stop 
+stophalfbeat:
+0x100 0x48, 0
+0x101<3> 0
+rest 0x18	// 1.0 beats
+0x101<3> 1
+rest 0x18	// 1.0 beats
+0x101<3> 2
+rest 0x18	// 1.0 beats
+0x101<3> 3
+rest 0x18	// 1.0 beats
+stop 
+togetherstop:
+async_call onetwothree
+0x105<5> 
+0x100 0x60, 1
+rest 0x30	// 1.0 beats
+rest 0x30	// 1.0 beats
+0x102<3> 
+stop 
+togetherstopalt:
+async_call onetwothreealt
+0x105<5> 
+0x100 0x60, 1
+rest 0x30	// 1.0 beats
+rest 0x30	// 1.0 beats
+0x102<3> 
+stop 
+
+board:
+0x8F 3
+rest 0x10	// 0.333 beats
+async_call boardbeat
+fade<1> 1, 1, 1
+input 1
+random 3
+switch
+	case 0
+		async_call spin1beat
+		rest 0xC0
+		async_call stop1beat
+		rest 0x90
+		0x102<1> 
+		0x103 0
+		rest 0x30
+		async_call spin1beat
+		rest 0xC0
+		async_call stop1beat
+		rest 0xC0
+	break
+	case 1
+		async_call spin1beat
+		rest 0xC0
+		async_call stophalfbeat
+		rest 0x60
+		0x102<1> 
+		0x103 0
+		rest 0x30	// 1.0 beats
+		async_call spintogether
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		async_call togetherstop
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+	break
+	case 2
+		async_call spintogether
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		rest 0x30	// 1.0 beats
+		async_call togetherstop
+		rest 0x90
+		0x102<1> 
+		0x103 0
+		rest 0x30
+		async_call spin1beat
+		rest 0xC0
+		async_call stop1beat
+		rest 0xC0
+	break
+endswitch
+stop
+
 taptroupe:
 0x8F 3
 0x105 1
@@ -8688,6 +8837,7 @@ return
 
 elephant:
 0x8F 3
+0x105 0
 random 3
 switch 
 	case 2
@@ -8701,22 +8851,33 @@ switch
 	break
 endswitch
 rest 0x10	// 0.333 beats
+0x103 1
+0x102 0x60
+0x109 
+async_sub 0x28
 fade<1> 1, 1, 1
 input 1
-0x102 0x60
-random 1
-switch
-	case 0
-		0x101
-		rest 0x30
-		0x101<1> 0x30
-		rest 0x90
-		rest 0xC0
-		rest 0xC0
-		rest 0xC0
-	break
-endswitch
+0x109<1> 
+rest 0x30
+0x101
+0x101<1> 0x30
+rest 0x30
+rest 0x90
+rest 0xC0
+rest 0xC0
+rest 0xC0
 stop 
+
+startbleep:
+0x40<1> 0x1000291, 0x100
+rest 0x30
+0x40<1> 0x1000291, 0x100
+rest 0x30
+0x40<1> 0x1000291, 0x100
+rest 0x30
+0x40<1> 0x1000291, 0x100
+rest 0x30
+stop
 
 birdstart:
 0x104 0
@@ -9813,7 +9974,7 @@ input 1
 random 6
 switch
 	case 0
-		async_call sub88
+		async_sub 0x8B
 		rest 0x60
 		async_sub 0x60
 		rest 0x30
@@ -9872,7 +10033,7 @@ switch
 		rest 0x90
 		async_sub 0x73
 		rest 0x18
-		async_call sub88
+		async_sub 0x8B
 		rest 0x60
 		async_sub 0x60
 		rest 0x30
@@ -9904,7 +10065,7 @@ switch
 		async_sub 0x73
 	break
 	case 5
-		async_call sub88
+		async_sub 0x8B
 		rest 0x60
 		async_sub 0x60
 		rest 0x30
@@ -9930,7 +10091,7 @@ switch
 		async_sub 0x60
 		rest 0x30
 		async_sub 0x61
-		async_call sub88
+		async_sub 0x8B
 		rest 0x60
 		async_sub 0x60
 		rest 0x30
@@ -10009,72 +10170,52 @@ bossa:
 rest 0x10	// 0.333 beats
 fade<1> 1, 1, 1
 input 1
-rest 6
+unrest 6
 random 3
 switch
 	case 0
+		rest 0xC
 		0x102<0>
-		0x103<2> 2
-		async_call manballfirst
-		rest 0xC0
-		async_sub 0x63
-		rest 0xC0
-		0x103<1> 2
-		async_sub 0x64
-		rest 0xC0
-		async_sub 0x65
-	break
-	case 1
-		0x102<1>
-		0x103<1> 2
-		async_call womenballfirst
-		rest 0xC0
-		async_sub 0x65
-		rest 0xC0
-		0x103<2> 2
+		0x103<2> 1
 		async_sub 0x62
 		rest 0xC0
 		async_sub 0x63
-	break
-	case 2
-		0x102<1>
-		0x103<1> 2
-		async_call womenturnfirst
 		rest 0xC0
-		0x103<2> 2
-		async_sub 0x63
-		rest 0xC0
-		0x103<1> 2
+		0x103<1> 1
 		async_sub 0x65
 		rest 0xC0
-		0x103<2> 2
+		0x103<2> 1
+		async_sub 0x63
+	break
+	case 1
+		rest 0xC
+		0x102<0>
+		0x103<2> 1
+		async_sub 0x62
+		rest 0xC0
+		async_sub 0x62
+		rest 0xC0
+		async_sub 0x62
+		rest 0xC0
+		async_sub 0x63
+		rest 0xC0
+	break
+	case 2
+		unrest 0x24
+		0x102<1>
+		0x103<1> 1
+		async_sub 0x65
+		rest 0xC0
+		0x103<2> 1
+		async_sub 0x63
+		rest 0xC0
+		0x103<1> 1
+		async_sub 0x65
+		rest 0xC0
+		0x103<2> 1
 		async_sub 0x63
 		rest 0xC0
 		rest 0x24
-	break
-	case 3
-		0x102<0>
-		0x103<1> 2
-		async_call womenballfirst
-		rest 0xC0
-		async_sub 0x64
-		rest 0xC0
-		async_sub 0x64
-		rest 0xC0
-		async_sub 0x64
-		rest 0xC0
-	break
-	case 4
-		0x102<1>
-		0x103<2> 2
-		async_call manballfirst
-		rest 0xC0
-		async_sub 0x5E
-		rest 0xC0
-		async_sub 0x5E
-		rest 0xC0
-		async_sub 0x5E
-		rest 0xC0
 	break
 endswitch
 stop
@@ -14113,7 +14254,7 @@ switch
 	case 2
 	
 	call cellanim2wait
-	set_cellanim 2, u"rom:/cellanim/ntrShugyo_arrange.zlib", -1
+	set_cellanim 2, u"rom:/cellanim/ntrShugyo_arrange_alt.zlib", -1
 	call cellanim2wait
 	break
 	case 1
@@ -14146,6 +14287,73 @@ rest 0xC	// 0.25 beats
 
 game_cellanim 0x1B, 2
 0x2B 0x1B, 3
+stop
+
+loadmuncharrange:
+random 2
+switch
+	case 1
+	
+	call cellanim2wait
+	set_cellanim 2, u"rom:/cellanim/ntrShugyo_arrange.zlib", -1
+	call cellanim2wait
+	break
+	case 0
+	
+	call cellanim2wait
+	set_cellanim 2, u"rom:/cellanim/ntrShugyo_wario_ar.zlib", -1
+	call cellanim2wait
+	break
+call layout4wait
+set_layout 4, u"rom:/layout/agbTap.zlib", -1
+call layout4wait
+
+call effect2wait
+set_effect 2, u"rom:/effect/agbTap.zlib", -1
+call effect2wait
+
+remove_sfx 1
+rest 0xC	// 0.25 beats
+sub 3
+set_sfx 1, u"GROUP_NTR_SHUGYO"
+rest 0xC	// 0.25 beats
+
+game_cellanim 0x1B, 2
+0x2B 0x1B, 3
+stop
+
+loadboard:
+random 2
+switch
+	case 1
+	
+	call cellanim2wait
+	set_cellanim 2, u"rom:/cellanim/rvlRotation_remix09.zlib", -1
+	call cellanim2wait
+	break
+	case 0
+	
+	call cellanim2wait
+	set_cellanim 2, u"rom:/cellanim/rvlRotation_long.zlib", -1
+	call cellanim2wait
+	break
+endswitch
+
+call layout4wait
+set_layout 4, u"rom:/layout/agbTap.zlib", -1
+call layout4wait
+
+call effect2wait
+set_effect 2, u"rom:/effect/agbTap.zlib", -1
+call effect2wait
+
+remove_sfx 1
+rest 0xC	// 0.25 beats
+sub 3
+set_sfx 1, u"GROUP_KURU_SHOW"
+rest 0xC	// 0.25 beats
+game_cellanim 0x2F, 2
+0x2B 0x2F, 3
 stop
 
 loadfish:
@@ -15824,18 +16032,21 @@ switch
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBlanco_remix03.zlib", -1
 	call cellanim4wait
+	0x2B 0x35, 0xA
 	break
 	case 1
 	
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBlanco_long.zlib", -1
 	call cellanim4wait
+	0x2B 0x35, 3
 	break
 	case 0
 	
 	call cellanim4wait
 	set_cellanim 4, u"rom:/cellanim/ctrBlanco_arrange.zlib", -1
 	call cellanim4wait
+	0x2B 0x35, 5
 	break
 endswitch
 
@@ -15843,19 +16054,17 @@ call layout6wait
 set_layout 6, u"rom:/layout/ntrRobot_long.zlib", -1
 call layout6wait
 
-
 call effect4wait
 set_effect 4, u"rom:/effect/ctrBlanco.zlib", -1
 call effect4wait
 
-remove_sfx 4
+remove_sfx 3
 rest 0xC	// 0.25 beats
 sub 3
-set_sfx 4, u"GROUP_BLANCO"
+set_sfx 3, u"GROUP_BLANCO"
 rest 0xC	// 0.25 beats
-game_cellanim 0x35, 5
-game_effect 0x35, 5
-0x2B 0x35, 3
+game_cellanim 0x35, 4
+game_effect 0x35, 4
 stop 
 
 loadcircus:
